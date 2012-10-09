@@ -12,3 +12,6 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+#define BAAS_BASE_URL               @"https://stageapi.baas.io"
+#define BAAS_APPLICATION_ID     @"test-organization/bropbox"

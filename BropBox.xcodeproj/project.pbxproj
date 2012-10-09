@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AFA3AEE5162422F9001EB194 /* libbaas.io-sdk-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA3AEDD162422ED001EB194 /* libbaas.io-sdk-ios.a */; };
 		AFE81C2A160843E800255D1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C29160843E800255D1E /* UIKit.framework */; };
 		AFE81C2C160843E800255D1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2B160843E800255D1E /* Foundation.framework */; };
 		AFE81C2E160843E800255D1E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2D160843E800255D1E /* CoreGraphics.framework */; };
@@ -32,6 +33,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		AFA3AEDC162422ED001EB194 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AFEDF77C1623B82000C6ACE2;
+			remoteInfo = "baas.io-sdk-ios";
+		};
+		AFA3AEDE162422ED001EB194 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = AFEDF78D1623B82000C6ACE2;
+			remoteInfo = "baas.io-sdk-iosTests";
+		};
+		AFA3AEE3162422F7001EB194 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = AFEDF77B1623B82000C6ACE2;
+			remoteInfo = "baas.io-sdk-ios";
+		};
 		AFE81C5F160843E800255D1E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AFE81C1C160843E800255D1E /* Project object */;
@@ -42,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "baas.io-sdk-ios.xcodeproj"; path = "submodules/baas.io-sdk-ios/baas.io-sdk-ios.xcodeproj"; sourceTree = "<group>"; };
 		AFE81C25160843E800255D1E /* BropBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BropBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE81C29160843E800255D1E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AFE81C2B160843E800255D1E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -78,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA3AEE5162422F9001EB194 /* libbaas.io-sdk-ios.a in Frameworks */,
 				AFE81C2A160843E800255D1E /* UIKit.framework in Frameworks */,
 				AFE81C2C160843E800255D1E /* Foundation.framework in Frameworks */,
 				AFE81C2E160843E800255D1E /* CoreGraphics.framework in Frameworks */,
@@ -97,9 +121,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AFA3AED5162422ED001EB194 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AFA3AEDD162422ED001EB194 /* libbaas.io-sdk-ios.a */,
+				AFA3AEDF162422ED001EB194 /* baas.io-sdk-iosTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		AFE81C1A160843E800255D1E = {
 			isa = PBXGroup;
 			children = (
+				AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */,
 				AFE81C2F160843E800255D1E /* BropBox */,
 				AFE81C61160843E800255D1E /* BropBoxTests */,
 				AFE81C28160843E800255D1E /* Frameworks */,
@@ -194,6 +228,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				AFA3AEE4162422F7001EB194 /* PBXTargetDependency */,
 			);
 			name = BropBox;
 			productName = BropBox;
@@ -238,6 +273,12 @@
 			mainGroup = AFE81C1A160843E800255D1E;
 			productRefGroup = AFE81C26160843E800255D1E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = AFA3AED5162422ED001EB194 /* Products */;
+					ProjectRef = AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				AFE81C24160843E800255D1E /* BropBox */,
@@ -245,6 +286,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		AFA3AEDD162422ED001EB194 /* libbaas.io-sdk-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libbaas.io-sdk-ios.a";
+			remoteRef = AFA3AEDC162422ED001EB194 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AFA3AEDF162422ED001EB194 /* baas.io-sdk-iosTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "baas.io-sdk-iosTests.octest";
+			remoteRef = AFA3AEDE162422ED001EB194 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AFE81C23160843E800255D1E /* Resources */ = {
@@ -313,6 +371,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		AFA3AEE4162422F7001EB194 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "baas.io-sdk-ios";
+			targetProxy = AFA3AEE3162422F7001EB194 /* PBXContainerItemProxy */;
+		};
 		AFE81C60160843E800255D1E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AFE81C24160843E800255D1E /* BropBox */;
@@ -410,6 +473,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BropBox/BropBox-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/baas.io-sdk-ios";
 				INFOPLIST_FILE = "BropBox/BropBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -421,6 +485,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BropBox/BropBox-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/baas.io-sdk-ios";
 				INFOPLIST_FILE = "BropBox/BropBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -480,6 +545,7 @@
 				AFE81C6E160843E800255D1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AFE81C6F160843E800255D1E /* Build configuration list for PBXNativeTarget "BropBoxTests" */ = {
 			isa = XCConfigurationList;
@@ -488,6 +554,7 @@
 				AFE81C71160843E800255D1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
