@@ -1,0 +1,3 @@
+[submodule "submodules/baas.io-sdk-ios"]
+	path = submodules/baas.io-sdk-ios
+	url = http://gitblit.kthcorp.com/git/baas.io/baas.io-sdk-ios.git
