@@ -7,15 +7,44 @@
 //
 
 #import "AppDelegate.h"
-
 #import "FirstViewController.h"
-
 #import "SecondViewController.h"
-
+#import "BaasFileUtils.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+
+    
+//    UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+//    [client setDelegate:self];
+//    [client logInUser:@"cetauri" password:@"cetDauri"];
+    BaasFileUtils *file = [[BaasFileUtils alloc]init];
+//    [file download];
+
+    NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"first.png"]);
+
+    [file delete:@""
+      successBlock:^(NSDictionary *response) {
+          NSLog(@"response.description : %@", response.description);
+      }
+      failureBlock:^(NSError *error) {
+          NSLog(@"error : %@, %@", error.description, error.domain);
+      }
+     ];
+
+
+//    [file download:@"@\"https://github.com/AFNetworking/AFNetworking/zipball/master\""
+//            successBlock:^(NSString *path){
+//                NSLog(@"%@", path);
+//            }
+//            failureBlock:^(NSError *error){
+//                NSLog(@"error : %@, %@", error.description, error.domain);
+//            }
+//      progressBlock:^(float progress){
+//          NSLog(@"progress : %f", progress);
+//      }];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     UIViewController *viewController1 = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
@@ -29,7 +58,10 @@
     [self.window makeKeyAndVisible];
     return YES;
 }
-
+- (void)ugClientResponse:(UGClientResponse *)response
+{
+    NSLog(@"------------ %@, %@", response.rawResponse, response.response);
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
