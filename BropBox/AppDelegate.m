@@ -10,7 +10,7 @@
 #import "FirstViewController.h"
 #import "SecondViewController.h"
 #import "BaasFileUtils.h"
-#import "LoginViewController.h"
+#import "SignInViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -47,7 +47,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     if (true){  //로그인 됨?
-        LoginViewController *controller = [[LoginViewController alloc] init];
+        SignInViewController *controller = [[SignInViewController alloc] init];
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:controller];
     } else{
         [self startApplication:nil];

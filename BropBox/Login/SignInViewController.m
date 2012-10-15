@@ -1,20 +1,21 @@
 //
-//  LoginViewController.m
+//  SignInViewController+.m
 //  BropBox
 //
 //  Created by cetauri on 10/15/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "SignInViewController.h"
+#import "SignUpViewController.h"
 #import "UGClient.h"
 
-@interface LoginViewController (){
+@interface SignInViewController (){
     UITableView *_tableView ;
 }
 @end
 
-@implementation LoginViewController
+@implementation SignInViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,26 +34,42 @@
 
 #pragma mark UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 100;
+    return 200;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
     footerView.backgroundColor = [UIColor clearColor];
+
     UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     loginButton.frame = CGRectMake(10, 10, 300, 44);
     [loginButton setTitle:@"BropBox에 로그인" forState:UIControlStateNormal];
-    [loginButton addTarget:self action:@selector(loginButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    
+    [loginButton addTarget:self action:@selector(signInButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     loginButton.enabled = false;
     loginButton.tag = 3;
     [footerView addSubview:loginButton];
+
+    UIButton *signUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    signUpButton.frame = CGRectMake(10, 50, 300, 44);
+    signUpButton.titleLabel.font = [UIFont systemFontOfSize:13.];
+    [signUpButton setTitle:@"▶ BropBox 처음 사용함. (계정생성)" forState:UIControlStateNormal];
+    [signUpButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [signUpButton addTarget:self action:@selector(signUpButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [footerView addSubview:signUpButton];
+
     return footerView;
 }
 
 #pragma mark Baas event
-- (void)loginButtonPressed
+
+- (void)signUpButtonPressed
+{
+    SignUpViewController *vc = [[SignUpViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)signInButtonPressed
 {
     UITextField *idField = (UITextField *)[self.view viewWithTag:20];
     UITextField *passwdField = (UITextField *)[self.view viewWithTag:21];
@@ -129,7 +146,7 @@
         case 1:
         {
             if (![idField.text isEqualToString:@""] && ![passwdField.text isEqualToString:@""]){
-                [self loginButtonPressed];
+                [self signInButtonPressed];
             }
             break;
         }
