@@ -15,3 +15,5 @@
 
 #define BAAS_BASE_URL               @"https://stageapi.baas.io"
 #define BAAS_APPLICATION_ID     @"test-organization/bropbox"
+
+#define APP_LOGIN_FINISH_NOTIFICATION   @"appLoginFinishNotification"

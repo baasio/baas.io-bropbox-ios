@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27F2E4122553774B8B8A7C71 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F2E6E13FFBA852B908CA1F /* LoginViewController.m */; };
 		AFA3AEE5162422F9001EB194 /* libbaas.io-sdk-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA3AEDD162422ED001EB194 /* libbaas.io-sdk-ios.a */; };
 		AFE81C2A160843E800255D1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C29160843E800255D1E /* UIKit.framework */; };
 		AFE81C2C160843E800255D1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2B160843E800255D1E /* Foundation.framework */; };
@@ -64,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		27F2E394FCAF187CE7018D39 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		27F2E6E13FFBA852B908CA1F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "baas.io-sdk-ios.xcodeproj"; path = "submodules/baas.io-sdk-ios/baas.io-sdk-ios.xcodeproj"; sourceTree = "<group>"; };
 		AFE81C25160843E800255D1E /* BropBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BropBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE81C29160843E800255D1E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -121,6 +124,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27F2E1C138FA69CD1D6FCF8D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				27F2E394FCAF187CE7018D39 /* LoginViewController.h */,
+				27F2E6E13FFBA852B908CA1F /* LoginViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		AFA3AED5162422ED001EB194 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +189,7 @@
 				AFE81C4F160843E800255D1E /* FirstViewController.xib */,
 				AFE81C52160843E800255D1E /* SecondViewController.xib */,
 				AFE81C30160843E800255D1E /* Supporting Files */,
+				27F2E1C138FA69CD1D6FCF8D /* Login */,
 			);
 			path = BropBox;
 			sourceTree = "<group>";
@@ -357,6 +370,7 @@
 				AFE81C3A160843E800255D1E /* AppDelegate.m in Sources */,
 				AFE81C43160843E800255D1E /* FirstViewController.m in Sources */,
 				AFE81C4A160843E800255D1E /* SecondViewController.m in Sources */,
+				27F2E4122553774B8B8A7C71 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

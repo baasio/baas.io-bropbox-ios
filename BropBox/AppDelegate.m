@@ -10,19 +10,18 @@
 #import "FirstViewController.h"
 #import "SecondViewController.h"
 #import "BaasFileUtils.h"
+#import "LoginViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
-    
 //    UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
 //    [client setDelegate:self];
 //    [client logInUser:@"cetauri" password:@"cetDauri"];
     BaasFileUtils *file = [[BaasFileUtils alloc]init];
 //    [file download];
 
-    NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"first.png"]);
+//    NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"first.png"]);
 
     [file delete:@""
       successBlock:^(NSDictionary *response) {
@@ -46,17 +45,32 @@
 //      }];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    if (true){  //로그인 됨?
+        LoginViewController *controller = [[LoginViewController alloc] init];
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:controller];
+    } else{
+        [self startApplication:nil];
+    }
+    [self.window makeKeyAndVisible];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startApplication:)
+                                                 name:APP_LOGIN_FINISH_NOTIFICATION object:nil];
+    return YES;
+}
+
+- (void)startApplication:(NSNotification*) noti
+{
     // Override point for customization after application launch.
     UIViewController *viewController1 = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
     UIViewController *viewController2 = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
-    
+
     UIViewController *viewController3 = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
     UIViewController *viewController4 = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4];
     self.window.rootViewController = self.tabBarController;
-    [self.window makeKeyAndVisible];
-    return YES;
+
 }
 - (void)ugClientResponse:(UGClientResponse *)response
 {
