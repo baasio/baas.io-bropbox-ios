@@ -58,7 +58,6 @@
 
 - (void)ugClientResponse:(UGClientResponse *)response
 {
-
     NSDictionary *resp = (NSDictionary *)response.rawResponse;
     if (response.transactionState == kUGClientResponseFailure) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"회원가입에 실패하였습니다.\n다시 시도해주세요."
@@ -153,7 +152,6 @@
 
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellName = @"loginCell";
 
@@ -171,7 +169,6 @@
 
         field.backgroundColor = [UIColor clearColor];
         field.tag = 20 + indexPath.row;
-
 
         field.autocapitalizationType = UITextAutocapitalizationTypeNone;
         switch (indexPath.row){
@@ -194,7 +191,6 @@
                 field.placeholder = @"홍길동";
                 break;
         }
-
 
         [loginCell addSubview:field ];
     }

@@ -32,6 +32,8 @@
 		AFE81C5E160843E800255D1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2B160843E800255D1E /* Foundation.framework */; };
 		AFE81C66160843E800255D1E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C64160843E800255D1E /* InfoPlist.strings */; };
 		AFE81C69160843E800255D1E /* BropBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE81C68160843E800255D1E /* BropBoxTests.m */; };
+		AFFCBB8F162D07EA003E26C2 /* 57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = AFFCBB8E162D07EA003E26C2 /* 57x57.png */; };
+		AFFCBB91162D07EE003E26C2 /* 114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = AFFCBB90162D07EE003E26C2 /* 114x114.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 		AFE81C65160843E800255D1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AFE81C67160843E800255D1E /* BropBoxTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BropBoxTests.h; sourceTree = "<group>"; };
 		AFE81C68160843E800255D1E /* BropBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BropBoxTests.m; sourceTree = "<group>"; };
+		AFFCBB8E162D07EA003E26C2 /* 57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57x57.png; sourceTree = "<group>"; };
+		AFFCBB90162D07EE003E26C2 /* 114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114x114.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,8 @@
 		AFE81C1A160843E800255D1E = {
 			isa = PBXGroup;
 			children = (
+				AFFCBB90162D07EE003E26C2 /* 114x114.png */,
+				AFFCBB8E162D07EA003E26C2 /* 57x57.png */,
 				AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */,
 				AFE81C2F160843E800255D1E /* BropBox */,
 				AFE81C61160843E800255D1E /* BropBoxTests */,
@@ -337,6 +343,8 @@
 				AFE81C4E160843E800255D1E /* second@2x.png in Resources */,
 				AFE81C51160843E800255D1E /* FirstViewController.xib in Resources */,
 				AFE81C54160843E800255D1E /* SecondViewController.xib in Resources */,
+				AFFCBB8F162D07EA003E26C2 /* 57x57.png in Resources */,
+				AFFCBB91162D07EE003E26C2 /* 114x114.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
