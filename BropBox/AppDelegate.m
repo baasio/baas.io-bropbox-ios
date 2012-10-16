@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "FirstViewController.h"
+#import "BoxListViewController.h"
 #import "SecondViewController.h"
+#import "UploadViewController.h"
 #import "BaasFileUtils.h"
 #import "SignInViewController.h"
 @implementation AppDelegate
@@ -23,14 +24,14 @@
 
 //    NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"first.png"]);
 
-    [file delete:@""
-      successBlock:^(NSDictionary *response) {
-          NSLog(@"response.description : %@", response.description);
-      }
-      failureBlock:^(NSError *error) {
-          NSLog(@"error : %@, %@", error.description, error.domain);
-      }
-     ];
+//    [file delete:@""
+//      successBlock:^(NSDictionary *response) {
+//          NSLog(@"response.description : %@", response.description);
+//      }
+//      failureBlock:^(NSError *error) {
+//          NSLog(@"error : %@, %@", error.description, error.domain);
+//      }
+//     ];
 
 
 //    [file download:@"@\"https://github.com/AFNetworking/AFNetworking/zipball/master\""
@@ -46,7 +47,9 @@
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    if (true){  //로그인 됨?
+    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+//    NSLog(@"access_token : %@", access_token);
+    if (access_token == nil){
         SignInViewController *controller = [[SignInViewController alloc] init];
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:controller];
     } else{
@@ -61,11 +64,14 @@
 
 - (void)startApplication:(NSNotification*) noti
 {
-    // Override point for customization after application launch.
-    UIViewController *viewController1 = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+    BoxListViewController *boxListViewController = [[BoxListViewController alloc] init];
+    UIViewController *viewController1 = [[UINavigationController alloc] initWithRootViewController:boxListViewController];
+
     UIViewController *viewController2 = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
 
-    UIViewController *viewController3 = [[FirstViewController alloc] initWithNibName:@"FirstViewController" bundle:nil];
+    UploadViewController *uploadViewController = [[UploadViewController alloc] init];
+    UIViewController *viewController3 = [[UINavigationController alloc] initWithRootViewController:uploadViewController];
+
     UIViewController *viewController4 = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4];
