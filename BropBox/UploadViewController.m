@@ -28,7 +28,7 @@
 
         CGRect frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 49  - 44);
         _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-        _tableView.delegate = self;
+//        _tableView.delegate = self;
         _tableView.dataSource = self;
         [self.view addSubview:_tableView];
 
@@ -55,13 +55,69 @@
     [picker dismissViewControllerAnimated:YES completion:^(void){}];
     
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:info];
-    [dictionary setValue:NO forKey:@"uploaded"];
-    [_uploadFileList addObject:dictionary];
+    [dictionary setValue:nil forKey:@"uploadedInfo"];
+
+    int index = [_uploadFileList count];
+    [_uploadFileList insertObject:dictionary atIndex:index];
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0] ;
+
     
-    [_tableView reloadData];
+    
+    UIProgressView *progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
+    CGRect frame = progressView.frame;
+    frame.origin.x +=45;
+    frame.origin.y +=30;
+    frame.size.width = self.view.frame.size.width - 50;
+    progressView.frame = frame;
+    [dictionary setObject:progressView forKey:@"progressView"];
+
+    UIImage *image = [dictionary objectForKey:@"UIImagePickerControllerOriginalImage"];
+    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+
+    BaasFileUtils *fileUtils = [[BaasFileUtils alloc]init];
+    [fileUtils upload:data
+        successBlock:^(NSDictionary *response){
+
+            NSMutableDictionary *uploadedInfo = [NSMutableDictionary dictionary];
+            for (NSDictionary *dic in [response  objectForKey:@"entities"]){
+                float size = [[dic objectForKey:@"size"] floatValue];
+                if (size !=  0){
+                    [uploadedInfo setValue:[NSString stringWithFormat:@"%f",size / 1000.f ] forKey:@"size"];
+                    [uploadedInfo setValue:[dic objectForKey:@"modified"] forKey:@"date"];
+
+                    break;
+                }
+            }
+            [dictionary setValue:uploadedInfo forKey:@"uploadedInfo"];
+
+            UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+            [progressView removeFromSuperview];
+            [dictionary removeObjectForKey:@"progressView"];
+
+            [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
+
+        }
+        failureBlock:^(NSError *error){
+            NSLog(@"error : %@, %@", error.description, error.domain);
+
+            UITableViewCell *listCell =  [_tableView cellForRowAtIndexPath:indexPath];
+            listCell.detailTextLabel.text = error.description;
+
+            UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+            [progressView removeFromSuperview];
+        }
+        progressBlock:^(float progress){
+            UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+            progressView.progress = progress;
+        }];
+
+    
+    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
+
 }
 
-#pragma mark UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _uploadFileList.count;
@@ -75,61 +131,45 @@
     if (listCell == nil) {
         listCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellName];
     }
-    
-    NSMutableDictionary *info = [_uploadFileList objectAtIndex:indexPath.row];
-    
+
+    __block NSMutableDictionary *info = [_uploadFileList objectAtIndex:indexPath.row];
+
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     listCell.imageView.image = image;
     listCell.textLabel.font = [UIFont boldSystemFontOfSize:17.];
-    
-    NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
-    ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
-    [assetLibrary assetForURL:url
-                  resultBlock:^(ALAsset *asset){
-                      ALAssetRepresentation *rep = [asset defaultRepresentation];
-                      
-                      listCell.textLabel.text = [NSString stringWithFormat:@"%@" , rep.filename];
-//                      listCell.detailTextLabel.text = [NSString stringWithFormat:@"%lld Kb", rep.size/1000];
-//                      
-//                      listCell.detailTextLabel.hidden = YES;
-                  }
-                 failureBlock:^(NSError *err) {
-                     NSLog(@"Error: %@",[err localizedDescription]);
-                 }];
-    if (![info objectForKey:@"uploaded"]) {
 
-        BaasFileUtils *fileUtils = [[BaasFileUtils alloc]init];
-        
-        UIProgressView *progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
-        CGRect frame = progressView.frame;
-        frame.origin.x +=40;
-        frame.origin.y +=30;
-        frame.size.width = self.view.frame.size.width - 50;
-        progressView.frame = frame;
-        [listCell addSubview:progressView];
-        
-        [fileUtils upload:UIImageJPEGRepresentation(image, 1.0)
-            successBlock:^(NSDictionary *response){
-//                NSLog(@"%@", response.description);
-                NSMutableDictionary *info = [_uploadFileList objectAtIndex:indexPath.row];
-                [info setValue:@"YES" forKey:@"uploaded"];
-                [_tableView reloadData];
-                
-//                listCell.detailTextLabel.text = [[response  objectForKey:@"entities"] objectForKey:@"size"];
-                
-                [progressView removeFromSuperview];
-            }
-            failureBlock:^(NSError *error){
-                NSLog(@"error : %@, %@", error.description, error.domain);
-                listCell.detailTextLabel.text = error.description;
-                [progressView removeFromSuperview];
-            }
-            progressBlock:^(float progress){
-                NSLog(@"progress : %f", progress);
-                progressView.progress = progress;
-            }];
-        
+    NSString *filename = [info objectForKey:@"filename"];
+    if (filename != nil){
+        listCell.textLabel.text = filename;
+    } else{
+        listCell.textLabel.text = @"Uploading...";
+        listCell.detailTextLabel.text = @" ";
+
+        NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
+        ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
+        [assetLibrary assetForURL:url
+                      resultBlock:^(ALAsset *asset){
+                          ALAssetRepresentation *rep = [asset defaultRepresentation];
+                          [info setObject:rep.filename forKey:@"filename"];
+                      }
+                     failureBlock:^(NSError *err) {
+                         NSLog(@"Error: %@",[err localizedDescription]);
+                     }];
     }
+
+    NSMutableDictionary *uploadedInfo = [info objectForKey:@"uploadedInfo"];
+    UIProgressView *progressView = (UIProgressView *)[info objectForKey:@"progressView"];
+
+    if (uploadedInfo != nil) {
+        int fSize = [[uploadedInfo objectForKey:@"size"] intValue];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[uploadedInfo objectForKey:@"date"]longLongValue] / 1000 ];
+
+        listCell.textLabel.text = filename;
+        listCell.detailTextLabel.text = [NSString stringWithFormat:@"%iKB, %@", fSize, date.description];
+    }else{
+         if(progressView) [listCell addSubview:progressView];
+    }
+
     return listCell;
 }
 

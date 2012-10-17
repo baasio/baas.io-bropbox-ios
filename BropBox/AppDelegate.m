@@ -12,6 +12,7 @@
 #import "UploadViewController.h"
 #import "BaasFileUtils.h"
 #import "SignInViewController.h"
+#import "SettingViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -50,8 +51,7 @@
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
 //    NSLog(@"access_token : %@", access_token);
     if (access_token == nil){
-        SignInViewController *controller = [[SignInViewController alloc] init];
-        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:controller];
+        [self login];
     } else{
         [self startApplication:nil];
     }
@@ -60,6 +60,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startApplication:)
                                                  name:APP_LOGIN_FINISH_NOTIFICATION object:nil];
     return YES;
+}
+
+- (void)login{
+    SignInViewController *controller = [[SignInViewController alloc] init];
+    self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:controller];
 }
 
 - (void)startApplication:(NSNotification*) noti
@@ -72,7 +77,10 @@
     UploadViewController *uploadViewController = [[UploadViewController alloc] init];
     UIViewController *viewController3 = [[UINavigationController alloc] initWithRootViewController:uploadViewController];
 
-    UIViewController *viewController4 = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+    SettingViewController *settingViewController = [[SettingViewController alloc] init];
+    UIViewController *viewController4 = [[UINavigationController alloc] initWithRootViewController:settingViewController];
+
+
     self.tabBarController = [[UITabBarController alloc] init];
     self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4];
     self.window.rootViewController = self.tabBarController;

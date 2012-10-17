@@ -32,7 +32,7 @@
 }
 							
 
-#pragma mark UITableViewDelegate
+#pragma mark - UITableViewDelegate
 
 //- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
 //    return [NSArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"]];
@@ -66,11 +66,10 @@
 //}
 
 
-#pragma mark UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
-
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -114,7 +113,7 @@
     listCell.imageView.image = [UIImage imageNamed:@"directory-icon.png"];
     listCell.textLabel.text = [NSString stringWithFormat:@"%i-111" , indexPath.row];
     listCell.textLabel.font = [UIFont boldSystemFontOfSize:17.];
-    NSLog(@"%@", listCell.textLabel.font.description);
+//    NSLog(@"%@", listCell.textLabel.font.description);
     return listCell;
 }
 @end

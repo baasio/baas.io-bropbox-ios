@@ -32,7 +32,7 @@
     return self;
 }
 
-#pragma mark UITableViewDelegate
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 200;
 }
@@ -61,7 +61,7 @@
     return footerView;
 }
 
-#pragma mark Baas event
+#pragma mark - event
 
 - (void)signUpButtonPressed
 {
@@ -104,7 +104,7 @@
     }
 }
 
-#pragma mark UITextFieldDelegate
+#pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -155,7 +155,7 @@
     return YES;
 }
 
-#pragma mark UITableViewDataSource
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;

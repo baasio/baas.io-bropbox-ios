@@ -12,6 +12,8 @@
 		AF327B75162D2E5400D027D0 /* directory-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AF327B74162D2E5400D027D0 /* directory-icon.png */; };
 		AFA3AEE5162422F9001EB194 /* libbaas.io-sdk-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA3AEDD162422ED001EB194 /* libbaas.io-sdk-ios.a */; };
 		AFB96BA6162D5D2200FE8FC4 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB96BA5162D5D2200FE8FC4 /* AssetsLibrary.framework */; };
+		AFBFD231162ECB580086B43F /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBFD230162ECB580086B43F /* SettingViewController.m */; };
+		AFBFD23D162ED0370086B43F /* redButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBFD23C162ED0370086B43F /* redButton.png */; };
 		AFE81C2A160843E800255D1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C29160843E800255D1E /* UIKit.framework */; };
 		AFE81C2C160843E800255D1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2B160843E800255D1E /* Foundation.framework */; };
 		AFE81C2E160843E800255D1E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2D160843E800255D1E /* CoreGraphics.framework */; };
@@ -78,6 +80,9 @@
 		AF327B74162D2E5400D027D0 /* directory-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "directory-icon.png"; sourceTree = "<group>"; };
 		AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "baas.io-sdk-ios.xcodeproj"; path = "submodules/baas.io-sdk-ios/baas.io-sdk-ios.xcodeproj"; sourceTree = "<group>"; };
 		AFB96BA5162D5D2200FE8FC4 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		AFBFD22F162ECB580086B43F /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		AFBFD230162ECB580086B43F /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		AFBFD23C162ED0370086B43F /* redButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redButton.png; sourceTree = "<group>"; };
 		AFE81C25160843E800255D1E /* BropBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BropBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE81C29160843E800255D1E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AFE81C2B160843E800255D1E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -151,6 +156,7 @@
 		AF327B73162D2E4B00D027D0 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AFBFD23C162ED0370086B43F /* redButton.png */,
 				AF327B74162D2E5400D027D0 /* directory-icon.png */,
 			);
 			name = images;
@@ -218,6 +224,8 @@
 				27F2E1C138FA69CD1D6FCF8D /* Login */,
 				27F2E3AF2A87453FA4A5A47F /* UploadViewController.h */,
 				AFF60656162D3CF200B2B7A9 /* UploadViewController.m */,
+				AFBFD22F162ECB580086B43F /* SettingViewController.h */,
+				AFBFD230162ECB580086B43F /* SettingViewController.m */,
 			);
 			path = BropBox;
 			sourceTree = "<group>";
@@ -362,6 +370,7 @@
 				AFFCBB8F162D07EA003E26C2 /* 57x57.png in Resources */,
 				AFFCBB91162D07EE003E26C2 /* 114x114.png in Resources */,
 				AF327B75162D2E5400D027D0 /* directory-icon.png in Resources */,
+				AFBFD23D162ED0370086B43F /* redButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +412,7 @@
 				27F2E4122553774B8B8A7C71 /* SignInViewController.m in Sources */,
 				27F2EB0A9B80125920563E74 /* SignUpViewController.m in Sources */,
 				AFF60657162D3CF200B2B7A9 /* UploadViewController.m in Sources */,
+				AFBFD231162ECB580086B43F /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
