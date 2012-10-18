@@ -45,7 +45,7 @@
 
     UGClient *baasClient = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
     [baasClient setDelegate:self];
-    [baasClient setLogging:YES];
+    [baasClient setLogging:NO];
     UGClientResponse *response = [baasClient addUser:idField.text
                                                email:emailField.text
                                                 name:nameField.text
@@ -74,7 +74,7 @@
 
         UGClient *baasClient = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
         [baasClient setDelegate:[[SignInViewController alloc]init]];
-        [baasClient setLogging:YES];
+        [baasClient setLogging:NO];
         UGClientResponse *response = [baasClient logInUser:idField.text password:passwdField.text];
     }
 }

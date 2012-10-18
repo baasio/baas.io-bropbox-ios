@@ -51,19 +51,11 @@
     [self presentViewController:picker animated:YES completion:^(void){}];
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    [picker dismissViewControllerAnimated:YES completion:^(void){}];
-    
+- (void)fileUpload:(NSDictionary *)info{
+
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:info];
     [dictionary setValue:nil forKey:@"uploadedInfo"];
 
-    int index = [_uploadFileList count];
-    [_uploadFileList insertObject:dictionary atIndex:index];
-
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0] ;
-
-    
-    
     UIProgressView *progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleDefault];
     CGRect frame = progressView.frame;
     frame.origin.x +=45;
@@ -71,6 +63,10 @@
     frame.size.width = self.view.frame.size.width - 50;
     progressView.frame = frame;
     [dictionary setObject:progressView forKey:@"progressView"];
+
+    int index = [_uploadFileList count];
+    [_uploadFileList insertObject:dictionary atIndex:index];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0] ;
 
     UIImage *image = [dictionary objectForKey:@"UIImagePickerControllerOriginalImage"];
     NSData *data = UIImageJPEGRepresentation(image, 1.0);
@@ -91,11 +87,25 @@
             }
             [dictionary setValue:uploadedInfo forKey:@"uploadedInfo"];
 
+            //insert directories Collection
+            NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
+            UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+            [client setLogging:NO];
+            [client setAuth:access_token];
+
+            NSMutableDictionary *entity = [NSMutableDictionary dictionaryWithDictionary:response];
+            [entity setObject:@"directories" forKey:@"type"];
+            [entity setObject:[dictionary objectForKey:@"filename"] forKey:@"filename"];
+
+            UGClientResponse *clientResponse = [client createEntity:entity];
+            NSLog(@"response.transactionID : %i", clientResponse.transactionID);
+
             UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
             [progressView removeFromSuperview];
             [dictionary removeObjectForKey:@"progressView"];
 
             [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
+
 
         }
         failureBlock:^(NSError *error){
@@ -112,9 +122,27 @@
             progressView.progress = progress;
         }];
 
-    
+
     [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
 
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    [picker dismissViewControllerAnimated:YES completion:^(void){}];
+
+    NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
+    ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
+    [assetLibrary assetForURL:url
+                  resultBlock:^(ALAsset *asset){
+                      ALAssetRepresentation *rep = [asset defaultRepresentation];
+                      NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:info];
+                      [dictionary setObject:rep.filename forKey:@"filename"];
+                      [self fileUpload:dictionary];
+                  }
+                 failureBlock:^(NSError *err) {
+                     NSLog(@"Error: %@",[err localizedDescription]);
+                 }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -145,16 +173,6 @@
         listCell.textLabel.text = @"Uploading...";
         listCell.detailTextLabel.text = @" ";
 
-        NSURL *url = [info valueForKey:UIImagePickerControllerReferenceURL];
-        ALAssetsLibrary *assetLibrary=[[ALAssetsLibrary alloc] init];
-        [assetLibrary assetForURL:url
-                      resultBlock:^(ALAsset *asset){
-                          ALAssetRepresentation *rep = [asset defaultRepresentation];
-                          [info setObject:rep.filename forKey:@"filename"];
-                      }
-                     failureBlock:^(NSError *err) {
-                         NSLog(@"Error: %@",[err localizedDescription]);
-                     }];
     }
 
     NSMutableDictionary *uploadedInfo = [info objectForKey:@"uploadedInfo"];

@@ -35,6 +35,7 @@
 - (void)signOutButtonPressed
 {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"access_token"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     id<UIApplicationDelegate> applicationDelegate = [UIApplication sharedApplication].delegate;

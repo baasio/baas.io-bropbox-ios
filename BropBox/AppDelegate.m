@@ -10,7 +10,7 @@
 #import "BoxListViewController.h"
 #import "SecondViewController.h"
 #import "UploadViewController.h"
-#import "BaasFileUtils.h"
+#import "Baas_SDK.h"
 #import "SignInViewController.h"
 #import "SettingViewController.h"
 @implementation AppDelegate
@@ -88,8 +88,9 @@
 }
 - (void)ugClientResponse:(UGClientResponse *)response
 {
-    NSLog(@"------------ %@, %@", response.rawResponse, response.response);
+    NSLog(@"------------ %@", response.rawResponse);
 }
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

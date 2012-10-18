@@ -96,8 +96,10 @@
         [alertView show];
     } else {
         NSString *access_token = [resp objectForKey:@"access_token"];
-        
+        NSDictionary *user = [resp objectForKey:@"user"];
+
         [[NSUserDefaults standardUserDefaults] setObject:access_token forKey:@"access_token"];
+        [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"user"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:APP_LOGIN_FINISH_NOTIFICATION object:access_token];
