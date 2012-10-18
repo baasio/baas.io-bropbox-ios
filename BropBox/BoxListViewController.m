@@ -7,9 +7,12 @@
 //
 
 #import "BoxListViewController.h"
-
+#import "Baas_SDK.h"
+#import "AFNetworking.h"
 @interface BoxListViewController ()    {
-    UITableView *_tableView ;
+    UITableView *_tableView;
+    NSMutableArray *_array;
+
 }
 @end
 
@@ -26,11 +29,34 @@
         _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.allowsSelection = NO;
         [self.view addSubview:_tableView];
+
+        _array = [NSMutableArray array];
     }
     return self;
 }
 							
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
+    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
+    UGQuery *query = [[UGQuery alloc] init];
+    [query addRequirement:[NSString stringWithFormat:@"uuid = %@" ,uuid]];
+    [query addRequirement:@"order by filename desc"];
+
+    UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+    [client setDelegate:self];
+    [client setAuth:access_token];
+    [client getEntities:@"directories" query:query];
+}
+
+- (void)ugClientResponse:(UGClientResponse *)response
+{
+    _array = [response.rawResponse objectForKey:@"entities"];
+    [_tableView reloadData];;
+}
 
 #pragma mark - UITableViewDelegate
 
@@ -48,7 +74,7 @@
 //
 //    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 //    loginButton.frame = CGRectMake(10, 10, 300, 44);
-//    [loginButton setTitle:@"BropBox에 로그인" forState:UIControlStateNormal];
+//    [loginButton setTitle:@"BropBㅇox에 로그인" forState:UIControlStateNormal];
 //    [loginButton addTarget:self action:@selector(signInButtonPressed) forControlEvents:UIControlEventTouchUpInside];
 //    loginButton.enabled = false;
 //    loginButton.tag = 3;
@@ -69,7 +95,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return _array.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,42 +104,19 @@
     UITableViewCell *listCell = [tableView dequeueReusableCellWithIdentifier:cellName];
     if (listCell == nil) {
         listCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
-//
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 80, 44)];
-//        label.backgroundColor = [UIColor clearColor];
-//        label.tag = 1;
-//        [loginCell addSubview:label];
-//
-//        UITextField *field = [[UITextField alloc] initWithFrame:CGRectMake(100, 10, 200, 44)];
-//        field.delegate = self;
-//
-//        field.backgroundColor = [UIColor clearColor];
-//        field.tag = 20 + indexPath.row;
-//
-//        if (indexPath.row == 1){
-//            field.secureTextEntry = YES;
-//        }
-//
-//        field.placeholder = @"필수 입력 항목";
-//
-//        [loginCell addSubview:field ];
     }
 
-//    UILabel *label = (UILabel*)[loginCell viewWithTag:1];
-//    UITextField *field = (UITextField*)[loginCell viewWithTag:2 + indexPath.row];
-//    field.autocapitalizationType = UITextAutocapitalizationTypeNone;
-//    switch (indexPath.row){
-//        case 0:
-//            label.text = @"아이디";
-//            break;
-//        case 1:
-//            label.text = @"암호";
-//            break;
-//    }
-    listCell.imageView.image = [UIImage imageNamed:@"directory-icon.png"];
-    listCell.textLabel.text = [NSString stringWithFormat:@"%i-111" , indexPath.row];
+    NSDictionary *object = [_array objectAtIndex:indexPath.row] ;
+    NSString *filename = [object objectForKey:@"filename"];
+    NSString *path = [NSString stringWithFormat:@"%@/%@/%@/%@", BAAS_BASE_URL, BAAS_APPLICATION_ID, @"files", [[[object objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
+    NSLog(@"%@", path);
+//    listCell.imageView.image = [UIImage imageNamed:@"directory-icon.png"];
+    listCell.textLabel.text = filename;
     listCell.textLabel.font = [UIFont boldSystemFontOfSize:17.];
-//    NSLog(@"%@", listCell.textLabel.font.description);
+
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 100.0f)];
+    [imageView setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"directory-icon.png"]];
+    listCell.imageView.image  = imageView.image;
     return listCell;
 }
 @end
