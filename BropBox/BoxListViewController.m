@@ -9,6 +9,9 @@
 #import "BoxListViewController.h"
 #import "Baas_SDK.h"
 #import "AFNetworking.h"
+#import "AppDelegate.h"
+#import "DownloadViewController.h"
+
 @interface BoxListViewController ()    {
     UITableView *_tableView;
     NSMutableArray *_array;
@@ -29,7 +32,7 @@
         _tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.allowsSelection = NO;
+//        _tableView.allowsSelection = NO;
         [self.view addSubview:_tableView];
 
         _array = [NSMutableArray array];
@@ -44,7 +47,7 @@
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
     UGQuery *query = [[UGQuery alloc] init];
     [query addRequirement:[NSString stringWithFormat:@"uuid = %@" ,uuid]];
-    [query addRequirement:@"order by filename desc"];
+    [query addRequirement:@"order by filename asc"];
 
     UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
     [client setDelegate:self];
@@ -60,37 +63,15 @@
 
 #pragma mark - UITableViewDelegate
 
-//- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView{
-//    return [NSArray arrayWithArray:@[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"]];
-//}
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    return 200;
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-//    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
-//    footerView.backgroundColor = [UIColor clearColor];
-//
-//    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    loginButton.frame = CGRectMake(10, 10, 300, 44);
-//    [loginButton setTitle:@"BropBㅇox에 로그인" forState:UIControlStateNormal];
-//    [loginButton addTarget:self action:@selector(signInButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-//    loginButton.enabled = false;
-//    loginButton.tag = 3;
-//    [footerView addSubview:loginButton];
-//
-//    UIButton *signUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    signUpButton.frame = CGRectMake(10, 50, 300, 44);
-//    signUpButton.titleLabel.font = [UIFont systemFontOfSize:13.];
-//    [signUpButton setTitle:@"▶ BropBox 처음 사용함. (계정생성)" forState:UIControlStateNormal];
-//    [signUpButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//    [signUpButton addTarget:self action:@selector(signUpButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-//    [footerView addSubview:signUpButton];
-//
-//    return footerView;
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    AppDelegate *delegate =  (AppDelegate *)[UIApplication sharedApplication].delegate;
+    [delegate.tabBarController setSelectedIndex:1];
 
+    UINavigationController *viewControllers = (UINavigationController *)[delegate.tabBarController selectedViewController];
+    DownloadViewController *downloadViewController  = [viewControllers.viewControllers objectAtIndex:0];
+    [downloadViewController download:_array[indexPath.row]];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -109,8 +90,7 @@
     NSDictionary *object = [_array objectAtIndex:indexPath.row] ;
     NSString *filename = [object objectForKey:@"filename"];
     NSString *path = [NSString stringWithFormat:@"%@/%@/%@/%@", BAAS_BASE_URL, BAAS_APPLICATION_ID, @"files", [[[object objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
-    NSLog(@"%@", path);
-//    listCell.imageView.image = [UIImage imageNamed:@"directory-icon.png"];
+
     listCell.textLabel.text = filename;
     listCell.textLabel.font = [UIFont boldSystemFontOfSize:17.];
 

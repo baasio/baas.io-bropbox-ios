@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "BoxListViewController.h"
-#import "SecondViewController.h"
+#import "DownloadViewController.h"
 #import "UploadViewController.h"
 #import "Baas_SDK.h"
 #import "SignInViewController.h"
@@ -17,39 +17,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
-//    [client setDelegate:self];
-//    [client logInUser:@"cetauri" password:@"cetDauri"];
-    BaasFileUtils *file = [[BaasFileUtils alloc]init];
-//    [file download];
-
-//    NSData *imageData = UIImagePNGRepresentation([UIImage imageNamed:@"first.png"]);
-
-//    [file delete:@""
-//      successBlock:^(NSDictionary *response) {
-//          NSLog(@"response.description : %@", response.description);
-//      }
-//      failureBlock:^(NSError *error) {
-//          NSLog(@"error : %@, %@", error.description, error.domain);
-//      }
-//     ];
-
-
-//    [file download:@"@\"https://github.com/AFNetworking/AFNetworking/zipball/master\""
-//            successBlock:^(NSString *path){
-//                NSLog(@"%@", path);
-//            }
-//            failureBlock:^(NSError *error){
-//                NSLog(@"error : %@, %@", error.description, error.domain);
-//            }
-//      progressBlock:^(float progress){
-//          NSLog(@"progress : %f", progress);
-//      }];
-
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-//    NSLog(@"access_token : %@", access_token);
     if (access_token == nil){
         [self login];
     } else{
@@ -72,7 +42,8 @@
     BoxListViewController *boxListViewController = [[BoxListViewController alloc] init];
     UIViewController *viewController1 = [[UINavigationController alloc] initWithRootViewController:boxListViewController];
 
-    UIViewController *viewController2 = [[SecondViewController alloc] initWithNibName:@"SecondViewController" bundle:nil];
+    DownloadViewController *downloadViewController = [[DownloadViewController alloc] init];
+    UIViewController *viewController2 = [[UINavigationController alloc] initWithRootViewController:downloadViewController];
 
     UploadViewController *uploadViewController = [[UploadViewController alloc] init];
     UIViewController *viewController3 = [[UINavigationController alloc] initWithRootViewController:uploadViewController];

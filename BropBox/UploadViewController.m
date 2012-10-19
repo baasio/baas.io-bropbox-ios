@@ -71,10 +71,10 @@
     UIImage *image = [dictionary objectForKey:@"UIImagePickerControllerOriginalImage"];
     NSData *data = UIImageJPEGRepresentation(image, 1.0);
 
-    BaasFileUtils *fileUtils = [[BaasFileUtils alloc]init];
+    FileUtils *fileUtils = [[FileUtils alloc]init];
     [fileUtils upload:data
         successBlock:^(NSDictionary *response){
-
+            NSLog(@"response : %@", response.description);
             NSMutableDictionary *uploadedInfo = [NSMutableDictionary dictionary];
             for (NSDictionary *dic in [response  objectForKey:@"entities"]){
                 float size = [[dic objectForKey:@"size"] floatValue];
@@ -104,7 +104,7 @@
             [progressView removeFromSuperview];
             [dictionary removeObjectForKey:@"progressView"];
 
-            [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
+            [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
 
         }

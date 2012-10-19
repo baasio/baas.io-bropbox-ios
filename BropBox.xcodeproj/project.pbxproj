@@ -19,6 +19,9 @@
 		AF3BBDF416300BC90033DB5B /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3BBDE916300BC90033DB5B /* AFURLConnectionOperation.m */; };
 		AF3BBDF516300BC90033DB5B /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3BBDEB16300BC90033DB5B /* AFXMLRequestOperation.m */; };
 		AF3BBDF616300BC90033DB5B /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3BBDED16300BC90033DB5B /* UIImageView+AFNetworking.m */; };
+		AF3BBE021630F9DC0033DB5B /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3BBE011630F9DC0033DB5B /* DownloadViewController.m */; };
+		AF7304BE163149D200CF3488 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7304BD163149D200CF3488 /* PreviewViewController.m */; };
+		AF7304C016314CF100CF3488 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7304BF16314CF100CF3488 /* QuickLook.framework */; };
 		AFA3AEE5162422F9001EB194 /* libbaas.io-sdk-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA3AEDD162422ED001EB194 /* libbaas.io-sdk-ios.a */; };
 		AFB96BA6162D5D2200FE8FC4 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB96BA5162D5D2200FE8FC4 /* AssetsLibrary.framework */; };
 		AFBFD231162ECB580086B43F /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBFD230162ECB580086B43F /* SettingViewController.m */; };
@@ -35,10 +38,8 @@
 		AFE81C43160843E800255D1E /* BoxListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE81C42160843E800255D1E /* BoxListViewController.m */; };
 		AFE81C45160843E800255D1E /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C44160843E800255D1E /* first.png */; };
 		AFE81C47160843E800255D1E /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C46160843E800255D1E /* first@2x.png */; };
-		AFE81C4A160843E800255D1E /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE81C49160843E800255D1E /* SecondViewController.m */; };
 		AFE81C4C160843E800255D1E /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C4B160843E800255D1E /* second.png */; };
 		AFE81C4E160843E800255D1E /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C4D160843E800255D1E /* second@2x.png */; };
-		AFE81C54160843E800255D1E /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C52160843E800255D1E /* SecondViewController.xib */; };
 		AFE81C5C160843E800255D1E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C5B160843E800255D1E /* SenTestingKit.framework */; };
 		AFE81C5D160843E800255D1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C29160843E800255D1E /* UIKit.framework */; };
 		AFE81C5E160843E800255D1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2B160843E800255D1E /* Foundation.framework */; };
@@ -106,6 +107,10 @@
 		AF3BBDEB16300BC90033DB5B /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFXMLRequestOperation.m; path = "submodules/baas.io-sdk-ios/SubModules/AFNetworking/AFNetworking/AFXMLRequestOperation.m"; sourceTree = "<group>"; };
 		AF3BBDEC16300BC90033DB5B /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "submodules/baas.io-sdk-ios/SubModules/AFNetworking/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		AF3BBDED16300BC90033DB5B /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "submodules/baas.io-sdk-ios/SubModules/AFNetworking/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		AF3BBE011630F9DC0033DB5B /* DownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadViewController.m; sourceTree = "<group>"; };
+		AF7304BC163149D200CF3488 /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
+		AF7304BD163149D200CF3488 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
+		AF7304BF16314CF100CF3488 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "baas.io-sdk-ios.xcodeproj"; path = "submodules/baas.io-sdk-ios/baas.io-sdk-ios.xcodeproj"; sourceTree = "<group>"; };
 		AFB96BA5162D5D2200FE8FC4 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		AFBFD22F162ECB580086B43F /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -128,11 +133,9 @@
 		AFE81C42160843E800255D1E /* BoxListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxListViewController.m; sourceTree = "<group>"; };
 		AFE81C44160843E800255D1E /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
 		AFE81C46160843E800255D1E /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		AFE81C48160843E800255D1E /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		AFE81C49160843E800255D1E /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		AFE81C48160843E800255D1E /* DownloadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadViewController.h; sourceTree = "<group>"; };
 		AFE81C4B160843E800255D1E /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
 		AFE81C4D160843E800255D1E /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
-		AFE81C53160843E800255D1E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
 		AFE81C5A160843E800255D1E /* BropBoxTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BropBoxTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE81C5B160843E800255D1E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AFE81C63160843E800255D1E /* BropBoxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BropBoxTests-Info.plist"; sourceTree = "<group>"; };
@@ -149,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF7304C016314CF100CF3488 /* QuickLook.framework in Frameworks */,
 				AFB96BA6162D5D2200FE8FC4 /* AssetsLibrary.framework in Frameworks */,
 				AFA3AEE5162422F9001EB194 /* libbaas.io-sdk-ios.a in Frameworks */,
 				AFE81C2A160843E800255D1E /* UIKit.framework in Frameworks */,
@@ -228,6 +232,7 @@
 		AFE81C1A160843E800255D1E = {
 			isa = PBXGroup;
 			children = (
+				AF7304BF16314CF100CF3488 /* QuickLook.framework */,
 				AFFCBB90162D07EE003E26C2 /* 114x114.png */,
 				AFFCBB8E162D07EA003E26C2 /* 57x57.png */,
 				AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */,
@@ -270,17 +275,18 @@
 				AFE81C42160843E800255D1E /* BoxListViewController.m */,
 				AFE81C44160843E800255D1E /* first.png */,
 				AFE81C46160843E800255D1E /* first@2x.png */,
-				AFE81C48160843E800255D1E /* SecondViewController.h */,
-				AFE81C49160843E800255D1E /* SecondViewController.m */,
+				AFE81C48160843E800255D1E /* DownloadViewController.h */,
+				AF3BBE011630F9DC0033DB5B /* DownloadViewController.m */,
 				AFE81C4B160843E800255D1E /* second.png */,
 				AFE81C4D160843E800255D1E /* second@2x.png */,
-				AFE81C52160843E800255D1E /* SecondViewController.xib */,
 				AFE81C30160843E800255D1E /* Supporting Files */,
 				27F2E1C138FA69CD1D6FCF8D /* Login */,
 				27F2E3AF2A87453FA4A5A47F /* UploadViewController.h */,
 				AFF60656162D3CF200B2B7A9 /* UploadViewController.m */,
 				AFBFD22F162ECB580086B43F /* SettingViewController.h */,
 				AFBFD230162ECB580086B43F /* SettingViewController.m */,
+				AF7304BC163149D200CF3488 /* PreviewViewController.h */,
+				AF7304BD163149D200CF3488 /* PreviewViewController.m */,
 			);
 			path = BropBox;
 			sourceTree = "<group>";
@@ -421,7 +427,6 @@
 				AFE81C47160843E800255D1E /* first@2x.png in Resources */,
 				AFE81C4C160843E800255D1E /* second.png in Resources */,
 				AFE81C4E160843E800255D1E /* second@2x.png in Resources */,
-				AFE81C54160843E800255D1E /* SecondViewController.xib in Resources */,
 				AFFCBB8F162D07EA003E26C2 /* 57x57.png in Resources */,
 				AFFCBB91162D07EE003E26C2 /* 114x114.png in Resources */,
 				AF327B75162D2E5400D027D0 /* directory-icon.png in Resources */,
@@ -463,7 +468,6 @@
 				AFE81C36160843E800255D1E /* main.m in Sources */,
 				AFE81C3A160843E800255D1E /* AppDelegate.m in Sources */,
 				AFE81C43160843E800255D1E /* BoxListViewController.m in Sources */,
-				AFE81C4A160843E800255D1E /* SecondViewController.m in Sources */,
 				27F2E4122553774B8B8A7C71 /* SignInViewController.m in Sources */,
 				27F2EB0A9B80125920563E74 /* SignUpViewController.m in Sources */,
 				AFF60657162D3CF200B2B7A9 /* UploadViewController.m in Sources */,
@@ -477,6 +481,8 @@
 				AF3BBDF416300BC90033DB5B /* AFURLConnectionOperation.m in Sources */,
 				AF3BBDF516300BC90033DB5B /* AFXMLRequestOperation.m in Sources */,
 				AF3BBDF616300BC90033DB5B /* UIImageView+AFNetworking.m in Sources */,
+				AF3BBE021630F9DC0033DB5B /* DownloadViewController.m in Sources */,
+				AF7304BE163149D200CF3488 /* PreviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,14 +516,6 @@
 				AFE81C33160843E800255D1E /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		AFE81C52160843E800255D1E /* SecondViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AFE81C53160843E800255D1E /* en */,
-			);
-			name = SecondViewController.xib;
 			sourceTree = "<group>";
 		};
 		AFE81C64160843E800255D1E /* InfoPlist.strings */ = {
