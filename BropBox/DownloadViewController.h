@@ -6,8 +6,9 @@
 //  Copyright (c) 2012년 kth. All rights reserved.
 //
 
+#import <QuickLook/QuickLook.h>
 #import <UIKit/UIKit.h>
 
-@interface DownloadViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate>
+@interface DownloadViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, QLPreviewControllerDelegate>
 - (void)download:(NSDictionary *)info;
 @end

@@ -8,7 +8,6 @@
 
 #import "DownloadViewController.h"
 #import "Baas_SDK.h"
-#import "PreviewViewController.h"
 @interface DownloadViewController ()  {
     UITableView *_tableView ;
     NSMutableArray *_downloadFileList;
@@ -104,9 +103,15 @@
 {
     id obj = [_downloadFileList objectAtIndex:indexPath.row];
     if ([obj isKindOfClass:[NSString class]]){
-        PreviewViewController *previewViewController = [[PreviewViewController alloc] init];
 
-        [self.navigationController pushViewController:previewViewController animated:YES];
+        QLPreviewController *previewController = [[QLPreviewController alloc] init];
+        previewController.dataSource = self;
+        previewController.delegate = self;
+
+        // start previewing the document at the current section index
+        previewController.currentPreviewItemIndex = indexPath.row;
+
+        [self.navigationController pushViewController:previewController animated:YES];
     }
 }
 
@@ -136,23 +141,25 @@
         NSMutableDictionary *downloadInfo = [info objectForKey:@"downloadInfo"];
         UIProgressView *progressView = (UIProgressView *)[info objectForKey:@"progressView"];
 
-//        if (downloadInfo != nil) {
-//            int fSize = [[downloadInfo objectForKey:@"size"] intValue];
-//            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[downloadInfo objectForKey:@"date"]longLongValue] / 1000 ];
-//
-//            listCell.textLabel.text = filename;
-//            listCell.detailTextLabel.text = [NSString stringWithFormat:@"%iKB, %@", fSize, date.description];
-//        }else{
-             if(progressView) [listCell addSubview:progressView];
-            listCell.detailTextLabel.text = @" ";
-//        }
-
+        if(progressView) [listCell addSubview:progressView];
+        listCell.detailTextLabel.text = @" ";
     }
 
     listCell.textLabel.text = filename;
 
-
     return listCell;
+}
+#pragma mark - QLPreviewControllerDelegate
+- (NSInteger)numberOfPreviewItemsInPreviewController:(QLPreviewController *)previewController
+{
+    return 1;
+}
+
+- (id)previewController:(QLPreviewController *)previewController previewItemAtIndex:(NSInteger)idx
+{
+    NSIndexPath *selectedIndexPath = [_tableView indexPathForSelectedRow];
+    NSURL *qURL = [[NSURL alloc] initFileURLWithPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), [_downloadFileList objectAtIndex:selectedIndexPath.row]]];
+    return qURL;
 }
 
 @end

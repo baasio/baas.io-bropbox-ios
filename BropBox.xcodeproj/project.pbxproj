@@ -20,7 +20,6 @@
 		AF3BBDF516300BC90033DB5B /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3BBDEB16300BC90033DB5B /* AFXMLRequestOperation.m */; };
 		AF3BBDF616300BC90033DB5B /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3BBDED16300BC90033DB5B /* UIImageView+AFNetworking.m */; };
 		AF3BBE021630F9DC0033DB5B /* DownloadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF3BBE011630F9DC0033DB5B /* DownloadViewController.m */; };
-		AF7304BE163149D200CF3488 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF7304BD163149D200CF3488 /* PreviewViewController.m */; };
 		AF7304C016314CF100CF3488 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF7304BF16314CF100CF3488 /* QuickLook.framework */; };
 		AFA3AEE5162422F9001EB194 /* libbaas.io-sdk-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFA3AEDD162422ED001EB194 /* libbaas.io-sdk-ios.a */; };
 		AFB96BA6162D5D2200FE8FC4 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB96BA5162D5D2200FE8FC4 /* AssetsLibrary.framework */; };
@@ -108,8 +107,6 @@
 		AF3BBDEC16300BC90033DB5B /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "submodules/baas.io-sdk-ios/SubModules/AFNetworking/AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		AF3BBDED16300BC90033DB5B /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "submodules/baas.io-sdk-ios/SubModules/AFNetworking/AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		AF3BBE011630F9DC0033DB5B /* DownloadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadViewController.m; sourceTree = "<group>"; };
-		AF7304BC163149D200CF3488 /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
-		AF7304BD163149D200CF3488 /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
 		AF7304BF16314CF100CF3488 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "baas.io-sdk-ios.xcodeproj"; path = "submodules/baas.io-sdk-ios/baas.io-sdk-ios.xcodeproj"; sourceTree = "<group>"; };
 		AFB96BA5162D5D2200FE8FC4 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -285,8 +282,6 @@
 				AFF60656162D3CF200B2B7A9 /* UploadViewController.m */,
 				AFBFD22F162ECB580086B43F /* SettingViewController.h */,
 				AFBFD230162ECB580086B43F /* SettingViewController.m */,
-				AF7304BC163149D200CF3488 /* PreviewViewController.h */,
-				AF7304BD163149D200CF3488 /* PreviewViewController.m */,
 			);
 			path = BropBox;
 			sourceTree = "<group>";
@@ -482,7 +477,6 @@
 				AF3BBDF516300BC90033DB5B /* AFXMLRequestOperation.m in Sources */,
 				AF3BBDF616300BC90033DB5B /* UIImageView+AFNetworking.m in Sources */,
 				AF3BBE021630F9DC0033DB5B /* DownloadViewController.m in Sources */,
-				AF7304BE163149D200CF3488 /* PreviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
