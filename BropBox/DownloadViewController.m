@@ -39,7 +39,10 @@
 - (NSMutableArray*)getLocalFileList{
     NSMutableArray *list = [NSMutableArray array];
     NSString *localPath = [NSString stringWithFormat:@"%@/%@", NSTemporaryDirectory(), @"download"];
-    NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:nil];
+    if(![[NSFileManager defaultManager] fileExistsAtPath:localPath isDirectory:YES]){
+        [[NSFileManager defaultManager] createDirectoryAtPath:localPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:localPath error:nil];
     for (NSString *path in array){
         if (![path hasPrefix:@"."]){
             [list addObject:path];
@@ -159,7 +162,7 @@
 - (id)previewController:(QLPreviewController *)previewController previewItemAtIndex:(NSInteger)idx
 {
     NSIndexPath *selectedIndexPath = [_tableView indexPathForSelectedRow];
-    NSURL *qURL = [[NSURL alloc] initFileURLWithPath:[NSString stringWithFormat:@"%@%@", NSTemporaryDirectory(), [_downloadFileList objectAtIndex:selectedIndexPath.row]]];
+    NSURL *qURL = [[NSURL alloc] initFileURLWithPath:[NSString stringWithFormat:@"%@/%@/%@", NSTemporaryDirectory(), @"download", [_downloadFileList objectAtIndex:selectedIndexPath.row]]];
     return qURL;
 }
 
