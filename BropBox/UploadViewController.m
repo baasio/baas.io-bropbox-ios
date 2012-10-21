@@ -46,8 +46,10 @@
 {
     UIImagePickerController * picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
-    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.mediaTypes =
+            [UIImagePickerController availableMediaTypesForSourceType:
+                    UIImagePickerControllerSourceTypePhotoLibrary];
     [self presentViewController:picker animated:YES completion:^(void){}];
 }
 
@@ -68,9 +70,15 @@
     [_uploadFileList insertObject:dictionary atIndex:index];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0] ;
 
-    UIImage *image = [dictionary objectForKey:@"UIImagePickerControllerOriginalImage"];
-    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    NSData *data = nil;
 
+    if ([[info objectForKey:@"UIImagePickerControllerMediaType"] isEqualToString:@"public.movie"]) {
+        NSURL * furl = [info objectForKey:@"UIImagePickerControllerMediaURL"];
+        data = [NSData dataWithContentsOfURL:furl];
+    } else{
+        UIImage *image = [dictionary objectForKey:@"UIImagePickerControllerOriginalImage"];
+        data = UIImageJPEGRepresentation(image, 1.0);
+    }
     FileUtils *fileUtils = [[FileUtils alloc]init];
     [fileUtils upload:data
         successBlock:^(NSDictionary *response){

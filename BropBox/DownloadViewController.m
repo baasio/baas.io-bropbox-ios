@@ -38,6 +38,7 @@
 
 - (NSMutableArray*)getLocalFileList{
     NSMutableArray *list = [NSMutableArray array];
+    NSString *localPath = [NSString stringWithFormat:@"%@/%@", NSTemporaryDirectory(), @"download"];
     NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:NSTemporaryDirectory() error:nil];
     for (NSString *path in array){
         if (![path hasPrefix:@"."]){
@@ -67,7 +68,7 @@
     [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
     NSString *resourcePath = [NSString stringWithFormat:@"https://stageapi.baas.io/test-organization/bropbox/files/%@", [[[dictionary objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
-    NSString *targetPath = [NSString stringWithFormat:@"%@/%@", NSTemporaryDirectory(), [dictionary objectForKey:@"filename"]];
+    NSString *targetPath = [NSString stringWithFormat:@"%@/%@/%@", NSTemporaryDirectory(), @"download", [dictionary objectForKey:@"filename"]];
 
     FileUtils *fileUtils = [[FileUtils alloc]init];
     [fileUtils download:resourcePath

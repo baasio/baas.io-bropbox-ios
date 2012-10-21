@@ -8,7 +8,7 @@
 
 #import "SignUpViewController.h"
 #import "SignInViewController.h"
-#import "UGClient.h"
+#import "Baas_SDK.h"
 
 @interface SignUpViewController ()  {
     UITableView *_tableView ;

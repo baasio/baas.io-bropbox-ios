@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Baas_SDK.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
