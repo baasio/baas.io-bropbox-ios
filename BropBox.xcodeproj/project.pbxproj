@@ -229,7 +229,6 @@
 		AFE81C1A160843E800255D1E = {
 			isa = PBXGroup;
 			children = (
-				AF7304BF16314CF100CF3488 /* QuickLook.framework */,
 				AFFCBB90162D07EE003E26C2 /* 114x114.png */,
 				AFFCBB8E162D07EA003E26C2 /* 57x57.png */,
 				AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */,
@@ -253,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				AF3BBDB4163008C60033DB5B /* AFNetwoking */,
+				AF7304BF16314CF100CF3488 /* QuickLook.framework */,
 				AFB96BA5162D5D2200FE8FC4 /* AssetsLibrary.framework */,
 				AFE81C29160843E800255D1E /* UIKit.framework */,
 				AFE81C2B160843E800255D1E /* Foundation.framework */,
@@ -575,9 +575,10 @@
 		AFE81C6D160843E800255D1E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BropBox/BropBox-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/baas.io-sdk-ios";
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/baas.io-sdk-ios";
 				INFOPLIST_FILE = "BropBox/BropBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -587,9 +588,10 @@
 		AFE81C6E160843E800255D1E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BropBox/BropBox-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/baas.io-sdk-ios";
+				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/baas.io-sdk-ios";
 				INFOPLIST_FILE = "BropBox/BropBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
