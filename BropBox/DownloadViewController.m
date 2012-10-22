@@ -39,7 +39,7 @@
 - (NSMutableArray*)getLocalFileList{
     NSMutableArray *list = [NSMutableArray array];
     NSString *localPath = [NSString stringWithFormat:@"%@/%@", NSTemporaryDirectory(), @"download"];
-    if(![[NSFileManager defaultManager] fileExistsAtPath:localPath isDirectory:YES]){
+    if(![[NSFileManager defaultManager] fileExistsAtPath:localPath]){
         [[NSFileManager defaultManager] createDirectoryAtPath:localPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     NSArray *array = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:localPath error:nil];
@@ -94,7 +94,7 @@
                 [progressView removeFromSuperview];
              }
              progressBlock:^(float progress){
-                 NSLog(@"progress  :%f", progress);
+//                 NSLog(@"progress  :%f", progress);
                 UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
                 progressView.progress = progress;
              }];
@@ -132,7 +132,7 @@
     if (listCell == nil) {
         listCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellName];
     }
-    NSLog(@"indexPath.row : %i", indexPath.row);
+
     id obj = [_downloadFileList objectAtIndex:indexPath.row];
     __block NSMutableDictionary *info;
     NSString *filename;

@@ -46,8 +46,7 @@
     NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
     UGQuery *query = [[UGQuery alloc] init];
-    [query addRequirement:[NSString stringWithFormat:@"uuid = %@" ,uuid]];
-    [query addRequirement:@"order by filename asc"];
+    [query addRequirement:[NSString stringWithFormat:@"user = %@" ,uuid]];
 
     UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
     [client setDelegate:self];

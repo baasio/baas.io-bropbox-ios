@@ -96,6 +96,7 @@
             [dictionary setValue:uploadedInfo forKey:@"uploadedInfo"];
 
             //insert directories Collection
+            NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
             NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
             UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
             [client setLogging:NO];
@@ -104,7 +105,7 @@
             NSMutableDictionary *entity = [NSMutableDictionary dictionaryWithDictionary:response];
             [entity setObject:@"directories" forKey:@"type"];
             [entity setObject:[dictionary objectForKey:@"filename"] forKey:@"filename"];
-
+            [entity setObject:uuid forKey:@"user"];
             UGClientResponse *clientResponse = [client createEntity:entity];
             NSLog(@"response.transactionID : %i", clientResponse.transactionID);
 
@@ -134,7 +135,10 @@
     [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
 
 }
-
+- (void)ugClientResponse:(UGClientResponse *)response
+{
+    NSLog(@"------------ %@", response.rawResponse);
+}
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:^(void){}];
