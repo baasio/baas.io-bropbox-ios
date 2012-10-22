@@ -25,6 +25,14 @@
 		AFB96BA6162D5D2200FE8FC4 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB96BA5162D5D2200FE8FC4 /* AssetsLibrary.framework */; };
 		AFBFD231162ECB580086B43F /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBFD230162ECB580086B43F /* SettingViewController.m */; };
 		AFBFD23D162ED0370086B43F /* redButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AFBFD23C162ED0370086B43F /* redButton.png */; };
+		AFD432EF1635438C00D62516 /* dropbox.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD432E71635438C00D62516 /* dropbox.png */; };
+		AFD432F01635438C00D62516 /* dropbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD432E81635438C00D62516 /* dropbox@2x.png */; };
+		AFD432F11635438C00D62516 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD432E91635438C00D62516 /* setting.png */; };
+		AFD432F21635438C00D62516 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD432EA1635438C00D62516 /* setting@2x.png */; };
+		AFD432F31635438C00D62516 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD432EB1635438C00D62516 /* star.png */; };
+		AFD432F41635438C00D62516 /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD432EC1635438C00D62516 /* star@2x.png */; };
+		AFD432F51635438C00D62516 /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD432ED1635438C00D62516 /* upload.png */; };
+		AFD432F61635438C00D62516 /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFD432EE1635438C00D62516 /* upload@2x.png */; };
 		AFE81C2A160843E800255D1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C29160843E800255D1E /* UIKit.framework */; };
 		AFE81C2C160843E800255D1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2B160843E800255D1E /* Foundation.framework */; };
 		AFE81C2E160843E800255D1E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2D160843E800255D1E /* CoreGraphics.framework */; };
@@ -36,9 +44,7 @@
 		AFE81C40160843E800255D1E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C3F160843E800255D1E /* Default-568h@2x.png */; };
 		AFE81C43160843E800255D1E /* BoxListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE81C42160843E800255D1E /* BoxListViewController.m */; };
 		AFE81C45160843E800255D1E /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C44160843E800255D1E /* first.png */; };
-		AFE81C47160843E800255D1E /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C46160843E800255D1E /* first@2x.png */; };
 		AFE81C4C160843E800255D1E /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C4B160843E800255D1E /* second.png */; };
-		AFE81C4E160843E800255D1E /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AFE81C4D160843E800255D1E /* second@2x.png */; };
 		AFE81C5C160843E800255D1E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C5B160843E800255D1E /* SenTestingKit.framework */; };
 		AFE81C5D160843E800255D1E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C29160843E800255D1E /* UIKit.framework */; };
 		AFE81C5E160843E800255D1E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE81C2B160843E800255D1E /* Foundation.framework */; };
@@ -113,6 +119,14 @@
 		AFBFD22F162ECB580086B43F /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		AFBFD230162ECB580086B43F /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		AFBFD23C162ED0370086B43F /* redButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redButton.png; sourceTree = "<group>"; };
+		AFD432E71635438C00D62516 /* dropbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dropbox.png; sourceTree = "<group>"; };
+		AFD432E81635438C00D62516 /* dropbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropbox@2x.png"; sourceTree = "<group>"; };
+		AFD432E91635438C00D62516 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		AFD432EA1635438C00D62516 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
+		AFD432EB1635438C00D62516 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
+		AFD432EC1635438C00D62516 /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
+		AFD432ED1635438C00D62516 /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
+		AFD432EE1635438C00D62516 /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@2x.png"; sourceTree = "<group>"; };
 		AFE81C25160843E800255D1E /* BropBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BropBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE81C29160843E800255D1E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AFE81C2B160843E800255D1E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -129,10 +143,8 @@
 		AFE81C41160843E800255D1E /* BoxListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoxListViewController.h; sourceTree = "<group>"; };
 		AFE81C42160843E800255D1E /* BoxListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoxListViewController.m; sourceTree = "<group>"; };
 		AFE81C44160843E800255D1E /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		AFE81C46160843E800255D1E /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
 		AFE81C48160843E800255D1E /* DownloadViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DownloadViewController.h; sourceTree = "<group>"; };
 		AFE81C4B160843E800255D1E /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		AFE81C4D160843E800255D1E /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
 		AFE81C5A160843E800255D1E /* BropBoxTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BropBoxTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE81C5B160843E800255D1E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		AFE81C63160843E800255D1E /* BropBoxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BropBoxTests-Info.plist"; sourceTree = "<group>"; };
@@ -140,8 +152,8 @@
 		AFE81C67160843E800255D1E /* BropBoxTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BropBoxTests.h; sourceTree = "<group>"; };
 		AFE81C68160843E800255D1E /* BropBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BropBoxTests.m; sourceTree = "<group>"; };
 		AFF60656162D3CF200B2B7A9 /* UploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadViewController.m; sourceTree = "<group>"; };
-		AFFCBB8E162D07EA003E26C2 /* 57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 57x57.png; sourceTree = "<group>"; };
-		AFFCBB90162D07EE003E26C2 /* 114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 114x114.png; sourceTree = "<group>"; };
+		AFFCBB8E162D07EA003E26C2 /* 57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 57x57.png; path = ../57x57.png; sourceTree = "<group>"; };
+		AFFCBB90162D07EE003E26C2 /* 114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 114x114.png; path = ../114x114.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,8 +197,18 @@
 		AF327B73162D2E4B00D027D0 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AFD432E71635438C00D62516 /* dropbox.png */,
+				AFD432E81635438C00D62516 /* dropbox@2x.png */,
+				AFD432E91635438C00D62516 /* setting.png */,
+				AFD432EA1635438C00D62516 /* setting@2x.png */,
+				AFD432EB1635438C00D62516 /* star.png */,
+				AFD432EC1635438C00D62516 /* star@2x.png */,
+				AFD432ED1635438C00D62516 /* upload.png */,
+				AFD432EE1635438C00D62516 /* upload@2x.png */,
 				AFBFD23C162ED0370086B43F /* redButton.png */,
 				AF327B74162D2E5400D027D0 /* directory-icon.png */,
+				AFFCBB90162D07EE003E26C2 /* 114x114.png */,
+				AFFCBB8E162D07EA003E26C2 /* 57x57.png */,
 			);
 			name = images;
 			sourceTree = "<group>";
@@ -229,8 +251,6 @@
 		AFE81C1A160843E800255D1E = {
 			isa = PBXGroup;
 			children = (
-				AFFCBB90162D07EE003E26C2 /* 114x114.png */,
-				AFFCBB8E162D07EA003E26C2 /* 57x57.png */,
 				AFA3AED4162422ED001EB194 /* baas.io-sdk-ios.xcodeproj */,
 				AFE81C2F160843E800255D1E /* BropBox */,
 				AFE81C61160843E800255D1E /* BropBoxTests */,
@@ -271,11 +291,9 @@
 				AFE81C41160843E800255D1E /* BoxListViewController.h */,
 				AFE81C42160843E800255D1E /* BoxListViewController.m */,
 				AFE81C44160843E800255D1E /* first.png */,
-				AFE81C46160843E800255D1E /* first@2x.png */,
 				AFE81C48160843E800255D1E /* DownloadViewController.h */,
 				AF3BBE011630F9DC0033DB5B /* DownloadViewController.m */,
 				AFE81C4B160843E800255D1E /* second.png */,
-				AFE81C4D160843E800255D1E /* second@2x.png */,
 				AFE81C30160843E800255D1E /* Supporting Files */,
 				27F2E1C138FA69CD1D6FCF8D /* Login */,
 				27F2E3AF2A87453FA4A5A47F /* UploadViewController.h */,
@@ -419,13 +437,19 @@
 				AFE81C3E160843E800255D1E /* Default@2x.png in Resources */,
 				AFE81C40160843E800255D1E /* Default-568h@2x.png in Resources */,
 				AFE81C45160843E800255D1E /* first.png in Resources */,
-				AFE81C47160843E800255D1E /* first@2x.png in Resources */,
 				AFE81C4C160843E800255D1E /* second.png in Resources */,
-				AFE81C4E160843E800255D1E /* second@2x.png in Resources */,
 				AFFCBB8F162D07EA003E26C2 /* 57x57.png in Resources */,
 				AFFCBB91162D07EE003E26C2 /* 114x114.png in Resources */,
 				AF327B75162D2E5400D027D0 /* directory-icon.png in Resources */,
 				AFBFD23D162ED0370086B43F /* redButton.png in Resources */,
+				AFD432EF1635438C00D62516 /* dropbox.png in Resources */,
+				AFD432F01635438C00D62516 /* dropbox@2x.png in Resources */,
+				AFD432F11635438C00D62516 /* setting.png in Resources */,
+				AFD432F21635438C00D62516 /* setting@2x.png in Resources */,
+				AFD432F31635438C00D62516 /* star.png in Resources */,
+				AFD432F41635438C00D62516 /* star@2x.png in Resources */,
+				AFD432F51635438C00D62516 /* upload.png in Resources */,
+				AFD432F61635438C00D62516 /* upload@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
