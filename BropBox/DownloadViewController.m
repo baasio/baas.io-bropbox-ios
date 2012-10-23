@@ -76,7 +76,7 @@
     FileUtils *fileUtils = [[FileUtils alloc]init];
     [fileUtils download:resourcePath
                    path:targetPath
-             successBlock:^(void){
+             successBlock:^(NSDictionary *response){
                  UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
                  [progressView removeFromSuperview];
                  [dictionary removeObjectForKey:@"progressView"];
