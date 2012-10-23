@@ -600,11 +600,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: KT Hitel Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KT Hitel Co., Ltd.";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BropBox/BropBox-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/baas.io-sdk-ios";
 				INFOPLIST_FILE = "BropBox/BropBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5DBFFDB3-FC94-44EB-BB55-18FBCD8411F9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5DBFFDB3-FC94-44EB-BB55-18FBCD8411F9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -613,11 +618,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: KT Hitel Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: KT Hitel Co., Ltd.";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BropBox/BropBox-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/baas.io-sdk-ios";
 				INFOPLIST_FILE = "BropBox/BropBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5DBFFDB3-FC94-44EB-BB55-18FBCD8411F9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5DBFFDB3-FC94-44EB-BB55-18FBCD8411F9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
