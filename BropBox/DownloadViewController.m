@@ -70,7 +70,7 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0] ;
     [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
-    NSString *resourcePath = [NSString stringWithFormat:@"https://stageapi.baas.io/test-organization/bropbox/files/%@", [[[dictionary objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
+    NSString *resourcePath = [NSString stringWithFormat:@"https://stgapi.baas.io/test.file/bropbox/files/%@", [[[dictionary objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
     NSString *targetPath = [NSString stringWithFormat:@"%@/%@/%@", NSTemporaryDirectory(), @"download", [dictionary objectForKey:@"filename"]];
 
     FileUtils *fileUtils = [[FileUtils alloc]init];

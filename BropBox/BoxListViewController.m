@@ -56,7 +56,7 @@
 
 - (void)ugClientResponse:(UGClientResponse *)response
 {
-    _array = [response.rawResponse objectForKey:@"entities"];
+    _array = [NSMutableArray arrayWithArray:[response.rawResponse objectForKey:@"entities"]];
     [_tableView reloadData];;
 }
 
@@ -72,6 +72,50 @@
     [downloadViewController download:_array[indexPath.row]];
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
+
+    FileUtils *fileUtils = [[FileUtils alloc] init];
+    for (NSDictionary *dic in [_array[indexPath.row] objectForKey:@"entities"]){
+
+        NSLog(@"[dic objectForKey:@\"size\"]  : %i", [dic objectForKey:@"size"] );
+        if ([[dic objectForKey:@"size"] intValue] != 0){
+            [fileUtils delete:[dic objectForKey:@"uuid"]
+                 successBlock:^(NSDictionary *response){
+
+                    UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+                    [client setAuth:access_token];
+                    [client removeEntity:@"directories" entityID:[_array[indexPath.row] objectForKey:@"uuid"]];
+
+                     [_tableView beginUpdates];
+                     [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                     [_array removeObjectAtIndex:indexPath.row];
+                     [_tableView endUpdates];
+                     [_tableView reloadData];
+                 }
+                 failureBlock:^(NSError *error){
+                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"실패하였습니다.\n다시 시도해주세요."
+                                                                         message:error.localizedDescription
+                                                                        delegate:nil
+                                                               cancelButtonTitle:@"OK"
+                                                               otherButtonTitles:nil];
+                     [alertView show];
+                 }];
+            break;
+        }
+
+    }}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
