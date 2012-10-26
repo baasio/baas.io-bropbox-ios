@@ -8,7 +8,7 @@
 
 #import "SignUpViewController.h"
 #import "SignInViewController.h"
-#import "Baas_SDK.h"
+#import "BaasClient.h"
 
 @interface SignUpViewController ()  {
     UITableView *_tableView ;
@@ -43,7 +43,7 @@
     UITextField *emailField = (UITextField *)[self.view viewWithTag:22];
     UITextField *nameField = (UITextField *)[self.view viewWithTag:23];
 
-    UGClient *baasClient = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+    BaasClient *baasClient = [BaasClient createInstance];
     [baasClient setDelegate:self];
     [baasClient setLogging:NO];
     UGClientResponse *response = [baasClient addUser:idField.text
@@ -72,7 +72,7 @@
         UITextField *idField = (UITextField *)[self.view viewWithTag:20];
         UITextField *passwdField = (UITextField *)[self.view viewWithTag:21];
 
-        UGClient *baasClient = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+        BaasClient *baasClient = [BaasClient createInstance];
         [baasClient setDelegate:[[SignInViewController alloc]init]];
         [baasClient setLogging:NO];
         UGClientResponse *response = [baasClient logInUser:idField.text password:passwdField.text];

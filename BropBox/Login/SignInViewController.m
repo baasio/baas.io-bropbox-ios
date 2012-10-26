@@ -8,7 +8,7 @@
 
 #import "SignInViewController.h"
 #import "SignUpViewController.h"
-#import "UGClient.h"
+#import "BaasClient.h"
 
 @interface SignInViewController (){
     UITableView *_tableView ;
@@ -74,7 +74,7 @@
     UITextField *idField = (UITextField *)[self.view viewWithTag:20];
     UITextField *passwdField = (UITextField *)[self.view viewWithTag:21];
     
-    UGClient *baasClient = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+    BaasClient *baasClient = [BaasClient createInstance];
     [baasClient setDelegate:self];
     [baasClient setLogging:YES];
     UGClientResponse *response = [baasClient logInUser:idField.text password:passwdField.text];

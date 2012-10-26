@@ -10,13 +10,15 @@
 #import "BoxListViewController.h"
 #import "DownloadViewController.h"
 #import "UploadViewController.h"
-#import "Baas_SDK.h"
+#import "BaasClient.h"
 #import "SignInViewController.h"
 #import "SettingViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [BaasClient setApplicationInfo:@"https://stgapi.baas.io" organizationName:@"test.file" applicationName:@"bropbox"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];

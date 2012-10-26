@@ -7,7 +7,7 @@
 //
 
 #import "BoxListViewController.h"
-#import "Baas_SDK.h"
+#import "BaasClient.h"
 #import "AFNetworking.h"
 #import "AppDelegate.h"
 #import "DownloadViewController.h"
@@ -48,7 +48,7 @@
     UGQuery *query = [[UGQuery alloc] init];
     [query addRequirement:[NSString stringWithFormat:@"user = %@" ,uuid]];
 
-    UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+    BaasClient *client = [BaasClient createInstance];
     [client setDelegate:self];
     [client setAuth:access_token];
     [client getEntities:@"directories" query:query];
@@ -81,15 +81,14 @@
 {
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
 
-    FileUtils *fileUtils = [[FileUtils alloc] init];
+    BaasClient *client = [BaasClient createInstance];
     for (NSDictionary *dic in [_array[indexPath.row] objectForKey:@"entities"]){
 
-        NSLog(@"[dic objectForKey:@\"size\"]  : %i", [dic objectForKey:@"size"] );
         if ([[dic objectForKey:@"size"] intValue] != 0){
-            [fileUtils delete:[dic objectForKey:@"uuid"]
+            [client delete:[dic objectForKey:@"uuid"]
                  successBlock:^(NSDictionary *response){
 
-                    UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+                     BaasClient *client = [BaasClient createInstance];
                     [client setAuth:access_token];
                     [client removeEntity:@"directories" entityID:[_array[indexPath.row] objectForKey:@"uuid"]];
 
@@ -132,7 +131,7 @@
 
     NSDictionary *object = [_array objectAtIndex:indexPath.row] ;
     NSString *filename = [object objectForKey:@"filename"];
-    NSString *path = [NSString stringWithFormat:@"%@/%@/%@/%@", BAAS_BASE_URL, BAAS_APPLICATION_ID, @"files", [[[object objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
+    NSString *path = @"";//[NSString stringWithFormat:@"%@/%@/%@/%@", BAAS_BASE_URL, BAAS_APPLICATION_ID, @"files", [[[object objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
 
     listCell.textLabel.text = filename;
     listCell.textLabel.font = [UIFont boldSystemFontOfSize:17.];

@@ -13,7 +13,4 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define BAAS_BASE_URL               @"https://stgapi.baas.io/"
-#define BAAS_APPLICATION_ID     @"test.file/bropbox"
-
 #define APP_LOGIN_FINISH_NOTIFICATION   @"appLoginFinishNotification"

@@ -7,7 +7,7 @@
 //
 
 #import "DownloadViewController.h"
-#import "Baas_SDK.h"
+#import "BaasClient.h"
 @interface DownloadViewController ()  {
     UITableView *_tableView ;
     NSMutableArray *_downloadFileList;
@@ -72,9 +72,11 @@
 
     NSString *resourcePath = [NSString stringWithFormat:@"https://stgapi.baas.io/test.file/bropbox/files/%@", [[[dictionary objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
     NSString *targetPath = [NSString stringWithFormat:@"%@/%@/%@", NSTemporaryDirectory(), @"download", [dictionary objectForKey:@"filename"]];
+    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
 
-    FileUtils *fileUtils = [[FileUtils alloc]init];
-    [fileUtils download:resourcePath
+    BaasClient *client = [BaasClient createInstance];
+    [client setAuth:access_token];
+    [client download:resourcePath
                    path:targetPath
              successBlock:^(NSDictionary *response){
                  UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];

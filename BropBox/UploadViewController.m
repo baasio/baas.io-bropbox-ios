@@ -8,7 +8,7 @@
 
 #import "UploadViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "Baas_SDK.h"
+#import "BaasClient.h"
 
 @interface UploadViewController ()    {
     UITableView *_tableView ;
@@ -79,8 +79,11 @@
         UIImage *image = [dictionary objectForKey:@"UIImagePickerControllerOriginalImage"];
         data = UIImageJPEGRepresentation(image, 1.0);
     }
-    FileUtils *fileUtils = [[FileUtils alloc]init];
-    [fileUtils upload:data
+    
+    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
+    BaasClient *client = [BaasClient createInstance];
+    [client setAuth:access_token];
+    [client upload:data
         successBlock:^(NSDictionary *response){
             NSLog(@"response : %@", response.description);
             NSMutableDictionary *uploadedInfo = [NSMutableDictionary dictionary];
@@ -98,15 +101,14 @@
             //insert directories Collection
             NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
             NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-            UGClient *client = [[UGClient alloc] initWithApplicationID:BAAS_APPLICATION_ID];
+            BaasClient *client = [BaasClient createInstance];
             [client setLogging:NO];
             [client setAuth:access_token];
 
             NSMutableDictionary *entity = [NSMutableDictionary dictionaryWithDictionary:response];
-            [entity setObject:@"directories" forKey:@"type"];
             [entity setObject:[dictionary objectForKey:@"filename"] forKey:@"filename"];
             [entity setObject:uuid forKey:@"user"];
-            UGClientResponse *clientResponse = [client createEntity:entity];
+            UGClientResponse *clientResponse = [client createEntity:@"directories" entity:entity];
             NSLog(@"response.transactionID : %i", clientResponse.transactionID);
 
             UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
