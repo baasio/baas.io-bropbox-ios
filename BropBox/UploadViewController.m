@@ -80,10 +80,12 @@
         data = UIImageJPEGRepresentation(image, 1.0);
     }
     
+    NSDictionary *header = [NSDictionary dictionary];
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
     BaasClient *client = [BaasClient createInstance];
     [client setAuth:access_token];
     [client upload:data
+            header:header
         successBlock:^(NSDictionary *response){
             NSLog(@"response : %@", response.description);
             NSMutableDictionary *uploadedInfo = [NSMutableDictionary dictionary];

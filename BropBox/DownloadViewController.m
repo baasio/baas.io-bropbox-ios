@@ -70,11 +70,12 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0] ;
     [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
-    NSString *resourcePath = [NSString stringWithFormat:@"https://stgapi.baas.io/test.file/bropbox/files/%@", [[[dictionary objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
+    BaasClient *client = [BaasClient createInstance];
+
+    NSString *resourcePath = [NSString stringWithFormat:@"%@/files/%@", [client getAPIURL], [[[dictionary objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
     NSString *targetPath = [NSString stringWithFormat:@"%@/%@/%@", NSTemporaryDirectory(), @"download", [dictionary objectForKey:@"filename"]];
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
 
-    BaasClient *client = [BaasClient createInstance];
     [client setAuth:access_token];
     [client download:resourcePath
                    path:targetPath
@@ -115,7 +116,7 @@
         previewController.delegate = self;
 
         // start previewing the document at the current section index
-        previewController.currentPreviewItemIndex = indexPath.row;
+        previewController.currentPreviewItemIndex = 0;
 
         [self.navigationController pushViewController:previewController animated:YES];
     }
@@ -144,7 +145,7 @@
         info = obj;
         filename = [info objectForKey:@"filename"];
 
-        NSMutableDictionary *downloadInfo = [info objectForKey:@"downloadInfo"];
+//        NSMutableDictionary *downloadInfo = [info objectForKey:@"downloadInfo"];
         UIProgressView *progressView = (UIProgressView *)[info objectForKey:@"progressView"];
 
         if(progressView) [listCell addSubview:progressView];

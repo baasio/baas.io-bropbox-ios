@@ -45,7 +45,7 @@
 
     NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
-    UGQuery *query = [[UGQuery alloc] init];
+    BaasQuery *query = [[BaasQuery alloc] init];
     [query addRequirement:[NSString stringWithFormat:@"user = %@" ,uuid]];
 
     BaasClient *client = [BaasClient createInstance];
@@ -82,6 +82,7 @@
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
 
     BaasClient *client = [BaasClient createInstance];
+    [client setAuth:access_token];
     for (NSDictionary *dic in [_array[indexPath.row] objectForKey:@"entities"]){
 
         if ([[dic objectForKey:@"size"] intValue] != 0){
