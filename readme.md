@@ -7,20 +7,9 @@
 Xcode - Perferences - Downloads - Command Line Tools가 installed 상태인지 확인해주세요. 
 <br>
 ## Install
-Baas.io-SDK-iOS는 git의 submodule로 구성 되어 있습니다. SoruceTree 같은 툴을 이용할 경우 자동적으로 submodule을 인식하나, zip으로 다운 받거나 터미널에서 clone 할 경우에는 아래와 같이 작업해야 합니다.
+Baas.io-SDK-iOS는 git의 submodules로 구성 되어 있습니다. SoruceTree 같은 툴을 이용할 경우 자동적으로 submodule을 인식하나, zip으로 다운의 경우 특별한 설정이 필요합니다. 그래서 터미널에서 아래와 같이 clone 하는 것을 추천합니다.
 
-<br>
-**ZIP으로 다운 받은 경우** 
-
-압축을 풀고 아래와 같이 입력
-	
-	# git init
-	# ./submodule_setup.sh
-	
-**Git Clone 한 경우** 
-
-clone 후 아래와 같이 입력
-	
+	# git clone git://github.com/kthcorp/bropbox-ios.git
 	# ./submodule_setup.sh
 	
 ## Build
