@@ -1,6 +1,6 @@
 [submodule "submodules/baas.io-sdk"]
 	path = submodules/baas.io-sdk
-	url = https://github.com/kthcorp/bropbox-ios.git
+	url = git://github.com/kthcorp/baas.io-SDK-iOS.git
 [submodule "submodules/AFNetworking"]
 	path = submodules/AFNetworking
 	url = git://github.com/AFNetworking/AFNetworking.git
