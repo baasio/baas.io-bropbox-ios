@@ -1,0 +1,27 @@
+# Bropbox-iOS
+
+##Requirement 
+
+**Command Line Tools 설치**
+
+Xcode - Perferences - Downloads - Command Line Tools가 installed 상태인지 확인해주세요. 
+<br>
+## Install
+Baas.io-SDK-iOS는 git의 submodule로 구성 되어 있습니다. SoruceTree 같은 툴을 이용할 경우 자동적으로 submodule을 인식하나, zip으로 다운 받거나 터미널에서 clone 할 경우에는 아래와 같이 작업해야 합니다.
+
+<br>
+**ZIP으로 다운 받은 경우** 
+
+압축을 풀고 아래와 같이 입력
+	
+	# git init
+	# ./submodule_setup.sh
+	
+**Git Clone 한 경우** 
+
+clone 후 아래와 같이 입력
+	
+	# ./submodule_setup.sh
+	
+## Build
+일부 Xcode 버전에서 첫번째 빌드에서 header 파일을 못 찾는 버그가 있습니다. 컴파일 에러 발생 시 Project를 Clean(Shift+Cmd+K)하고 다시 Build(Cmd+R)하면 됩니다.
