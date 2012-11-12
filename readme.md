@@ -15,6 +15,9 @@ zip으로 다운 받은 경우에는 사용할 수 없습니다.
 
 	# git clone --recursive git://github.com/kthcorp/bropbox-ios
 
+zip으로 다운 받으신 경우에는 사용 할 수 없습니다. 아래 링크에서 소스를 다운 받으세요.
+<br>
+https://baas.io/docs/ko/ios/download.html
 
 ## Build
 일부 Xcode 버전에서 첫번째 빌드에서 header 파일을 못 찾는 버그가 있습니다. 컴파일 에러 발생 시 Project를 Clean(Shift+Cmd+K)하고 다시 Build(Cmd+R)하면 됩니다.
