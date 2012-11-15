@@ -17,7 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [BaasClient setApplicationInfo:@"https://stgapi.baas.io" organizationName:@"test.file" applicationName:@"bropbox"];
+    [BaasClient setApplicationInfo:@"test.sample" applicationName:@"bropbox"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
