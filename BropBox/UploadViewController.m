@@ -8,7 +8,7 @@
 
 #import "UploadViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "BaasClient.h"
+#import <baas.io/Baas.h>
 
 @interface UploadViewController ()    {
     UITableView *_tableView ;
@@ -79,70 +79,50 @@
         UIImage *image = [dictionary objectForKey:@"UIImagePickerControllerOriginalImage"];
         data = UIImageJPEGRepresentation(image, 1.0);
     }
-    
-    NSDictionary *header = [NSDictionary dictionary];
-    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
-    BaasClient *client = [BaasClient createInstance];
-    [client setAuth:access_token];
-    [client upload:data
-            header:header
-        successBlock:^(NSDictionary *response){
-            NSLog(@"response : %@", response.description);
-            NSMutableDictionary *uploadedInfo = [NSMutableDictionary dictionary];
-            for (NSDictionary *dic in [response  objectForKey:@"entities"]){
-                float size = [[dic objectForKey:@"size"] floatValue];
-                if (size !=  0){
-                    [uploadedInfo setValue:[NSString stringWithFormat:@"%f",size / 1000.f ] forKey:@"size"];
-                    [uploadedInfo setValue:[dic objectForKey:@"modified"] forKey:@"date"];
 
-                    break;
-                }
-            }
-            [dictionary setValue:uploadedInfo forKey:@"uploadedInfo"];
+    BaasioFile *file = [[BaasioFile alloc] init];
+    file.data = data;
+    file.filename = [info objectForKey:@"filename"];
+    [file setObject:[BaasioUser currentUser].uuid forKey:@"user"];
+    [file fileUploadInBackground:^(BaasioFile *file){
+//                        NSLog(@"response : %@", file.description);
+//                        NSMutableDictionary *uploadedInfo = [NSMutableDictionary dictionary];
+//                        for (NSDictionary *dic in [response  objectForKey:@"entities"]){
+//                            float size = [[dic objectForKey:@"size"] floatValue];
+//                            if (size !=  0){
+//                                [uploadedInfo setValue:[NSString stringWithFormat:@"%f",size / 1000.f ] forKey:@"size"];
+//                                [uploadedInfo setValue:[dic objectForKey:@"modified"] forKey:@"date"];
+//
+//                                break;
+//                            }
+//                        }
+//                        [dictionary setValue:uploadedInfo forKey:@"uploadedInfo"];
 
-            //insert directories Collection
-            NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
-            NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-            BaasClient *client = [BaasClient createInstance];
-            [client setLogging:NO];
-            [client setAuth:access_token];
+                        UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+                        [progressView removeFromSuperview];
+                        [dictionary removeObjectForKey:@"progressView"];
 
-            NSMutableDictionary *entity = [NSMutableDictionary dictionaryWithDictionary:response];
-            [entity setObject:[dictionary objectForKey:@"filename"] forKey:@"filename"];
-            [entity setObject:uuid forKey:@"user"];
-            UGClientResponse *clientResponse = [client createEntity:@"directories" entity:entity];
-            NSLog(@"response.transactionID : %i", clientResponse.transactionID);
+                        [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
-            UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
-            [progressView removeFromSuperview];
-            [dictionary removeObjectForKey:@"progressView"];
+                    }
+                    failureBlock:^(NSError *error){
+                        NSLog(@"error : %@, %@", error.description, error.domain);
 
-            [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                        UITableViewCell *listCell =  [_tableView cellForRowAtIndexPath:indexPath];
+                        listCell.detailTextLabel.text = error.description;
 
-
-        }
-        failureBlock:^(NSError *error){
-            NSLog(@"error : %@, %@", error.description, error.domain);
-
-            UITableViewCell *listCell =  [_tableView cellForRowAtIndexPath:indexPath];
-            listCell.detailTextLabel.text = error.description;
-
-            UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
-            [progressView removeFromSuperview];
-        }
-        progressBlock:^(float progress){
-            UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
-            progressView.progress = progress;
-        }];
-
+                        UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+                        [progressView removeFromSuperview];
+                    }
+                    progressBlock:^(float progress){
+                        UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+                        progressView.progress = progress;
+                    }];
 
     [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
 
 }
-- (void)ugClientResponse:(UGClientResponse *)response
-{
-    NSLog(@"------------ %@", response.rawResponse);
-}
+
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     [picker dismissViewControllerAnimated:YES completion:^(void){}];

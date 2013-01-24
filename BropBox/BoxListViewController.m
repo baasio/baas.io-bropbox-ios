@@ -7,8 +7,7 @@
 //
 
 #import "BoxListViewController.h"
-#import "BaasClient.h"
-#import "AFNetworking.h"
+#import <baas.io/Baas.h>
 #import "AppDelegate.h"
 #import "DownloadViewController.h"
 
@@ -42,23 +41,29 @@
 							
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//
+//    NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
+//    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
+//    BaasQuery *query = [[BaasQuery alloc] init];
+//
+//    BaasClient *client = [BaasClient createInstance];
+//    [client setDelegate:self];
+//    [client setAuth:access_token];
+//    [client getEntities:@"directories" query:query];
 
-    NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
-    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
-    BaasQuery *query = [[BaasQuery alloc] init];
-    [query addRequirement:[NSString stringWithFormat:@"user = %@" ,uuid]];
-
-    BaasClient *client = [BaasClient createInstance];
-    [client setDelegate:self];
-    [client setAuth:access_token];
-    [client getEntities:@"directories" query:query];
+    BaasioQuery *query = [BaasioQuery queryWithCollection:@"files"];
+    [query setWheres:[NSString stringWithFormat:@"user = %@" ,[BaasioUser currentUser].uuid]];
+    [query queryInBackground:^(NSArray *array){
+                    _array = array;
+                    [_tableView reloadData];;
+                }
+                failureBlock:nil];
 }
 
-- (void)ugClientResponse:(UGClientResponse *)response
-{
-    _array = [NSMutableArray arrayWithArray:[response.rawResponse objectForKey:@"entities"]];
-    [_tableView reloadData];;
-}
+//- (void)ugClientResponse:(UGClientResponse *)response
+//{
+
+//}
 
 #pragma mark - UITableViewDelegate
 
@@ -81,36 +86,37 @@
 {
     NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
 
-    BaasClient *client = [BaasClient createInstance];
-    [client setAuth:access_token];
-    for (NSDictionary *dic in [_array[indexPath.row] objectForKey:@"entities"]){
-
-        if ([[dic objectForKey:@"size"] intValue] != 0){
-            [client delete:[dic objectForKey:@"uuid"]
-                 successBlock:^(NSDictionary *response){
-
-                     BaasClient *client = [BaasClient createInstance];
-                    [client setAuth:access_token];
-                    [client removeEntity:@"directories" entityID:[_array[indexPath.row] objectForKey:@"uuid"]];
-
-                     [_tableView beginUpdates];
-                     [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                     [_array removeObjectAtIndex:indexPath.row];
-                     [_tableView endUpdates];
-                     [_tableView reloadData];
-                 }
-                 failureBlock:^(NSError *error){
-                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"실패하였습니다.\n다시 시도해주세요."
-                                                                         message:error.localizedDescription
-                                                                        delegate:nil
-                                                               cancelButtonTitle:@"OK"
-                                                               otherButtonTitles:nil];
-                     [alertView show];
-                 }];
-            break;
-        }
-
-    }}
+//    BaasClient *client = [BaasClient createInstance];
+//    [client setAuth:access_token];
+//    for (NSDictionary *dic in [_array[indexPath.row] objectForKey:@"entities"]){
+//
+//        if ([[dic objectForKey:@"size"] intValue] != 0){
+//            [client delete:[dic objectForKey:@"uuid"]
+//                 successBlock:^(NSDictionary *response){
+//
+//                     BaasClient *client = [BaasClient createInstance];
+//                    [client setAuth:access_token];
+//                    [client removeEntity:@"directories" entityID:[_array[indexPath.row] objectForKey:@"uuid"]];
+//
+//                     [_tableView beginUpdates];
+//                     [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//                     [_array removeObjectAtIndex:indexPath.row];
+//                     [_tableView endUpdates];
+//                     [_tableView reloadData];
+//                 }
+//                 failureBlock:^(NSError *error){
+//                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"실패하였습니다.\n다시 시도해주세요."
+//                                                                         message:error.localizedDescription
+//                                                                        delegate:nil
+//                                                               cancelButtonTitle:@"OK"
+//                                                               otherButtonTitles:nil];
+//                     [alertView show];
+//                 }];
+//            break;
+//        }
+//
+//    }
+}
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -137,9 +143,9 @@
     listCell.textLabel.text = filename;
     listCell.textLabel.font = [UIFont boldSystemFontOfSize:17.];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 100.0f)];
-    [imageView setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"directory-icon.png"]];
-    listCell.imageView.image  = imageView.image;
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 100.0f)];
+//    [imageView setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"directory-icon.png"]];
+//    listCell.imageView.image  = imageView.image;
     return listCell;
 }
 @end

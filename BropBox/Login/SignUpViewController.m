@@ -8,7 +8,7 @@
 
 #import "SignUpViewController.h"
 #import "SignInViewController.h"
-#import "BaasClient.h"
+#import <baas.io/Baas.h>
 
 @interface SignUpViewController ()  {
     UITableView *_tableView ;
@@ -42,41 +42,45 @@
     UITextField *passwdField = (UITextField *)[self.view viewWithTag:21];
     UITextField *emailField = (UITextField *)[self.view viewWithTag:22];
     UITextField *nameField = (UITextField *)[self.view viewWithTag:23];
-
-    BaasClient *baasClient = [BaasClient createInstance];
-    [baasClient setDelegate:self];
-    [baasClient setLogging:NO];
-    UGClientResponse *response = [baasClient addUser:idField.text
-                                               email:emailField.text
-                                                name:nameField.text
-                                            password:passwdField.text];
-    NSLog(@"response.transactionID : %i", response.transactionID);
-}
-
-
-#pragma mark - UGClient delegate
-
-- (void)ugClientResponse:(UGClientResponse *)response
-{
-    NSDictionary *resp = (NSDictionary *)response.rawResponse;
-    if (response.transactionState == kUGClientResponseFailure) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"회원가입에 실패하였습니다.\n다시 시도해주세요."
-                                                            message:[resp objectForKey:@"error_description"]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    } else {
-
-        //회원가입 성공
-        UITextField *idField = (UITextField *)[self.view viewWithTag:20];
-        UITextField *passwdField = (UITextField *)[self.view viewWithTag:21];
-
-        BaasClient *baasClient = [BaasClient createInstance];
-        [baasClient setDelegate:[[SignInViewController alloc]init]];
-        [baasClient setLogging:NO];
-        UGClientResponse *response = [baasClient logInUser:idField.text password:passwdField.text];
-    }
+    [BaasioUser signUpInBackground:idField.text
+                          password:passwdField.text
+                              name:nameField.text
+                             email:emailField.text
+                      successBlock:^(void){
+                          
+                          //회원가입 성공
+                          UITextField *idField = (UITextField *)[self.view viewWithTag:20];
+                          UITextField *passwdField = (UITextField *)[self.view viewWithTag:21];
+                          
+                          
+                          [BaasioUser signInBackground:idField.text
+                                              password:passwdField.text
+                                          successBlock:^(void){
+                                              
+                                              [[NSNotificationCenter defaultCenter] postNotificationName:APP_LOGIN_FINISH_NOTIFICATION object:nil];
+                                              
+                                          }
+                                          failureBlock:^(NSError *error){
+                                              UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"로그인에 실패하였습니다.\n다시 시도해주세요."
+                                                                                                  message:error.localizedDescription
+                                                                                                 delegate:nil
+                                                                                        cancelButtonTitle:@"OK"
+                                                                                        otherButtonTitles:nil];
+                                              [alertView show];
+                                              
+                                          }];
+                          
+                      }
+                      failureBlock:^(NSError *error){
+                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"회원가입에 실패하였습니다.\n다시 시도해주세요."
+                                                                              message:error.localizedDescription
+                                                                             delegate:nil
+                                                                    cancelButtonTitle:@"OK"
+                                                                    otherButtonTitles:nil];
+                          [alertView show];
+                          
+                      }];
+    
 }
 
 #pragma mark -UITableViewDelegate

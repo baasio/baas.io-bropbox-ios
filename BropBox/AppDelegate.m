@@ -10,27 +10,29 @@
 #import "BoxListViewController.h"
 #import "DownloadViewController.h"
 #import "UploadViewController.h"
-#import "BaasClient.h"
+#import <baas.io/Baas.h>
 #import "SignInViewController.h"
 #import "SettingViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [BaasClient setApplicationInfo:@"test.sample" applicationName:@"bropbox"];
+    [Baasio setApplicationInfo:@"https://stgapi.baas.io" baasioID:@"baas107" applicationName:@"bropbox"];
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
-    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
-    if (access_token == nil){
+    
+    BaasioUser *currentUser = [BaasioUser currentUser];
+    if (currentUser == nil) {
         [self login];
-    } else{
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startApplication:)
+                                                     name:APP_LOGIN_FINISH_NOTIFICATION object:nil];
+    }else{
         [self startApplication:nil];
     }
-    [self.window makeKeyAndVisible];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startApplication:)
-                                                 name:APP_LOGIN_FINISH_NOTIFICATION object:nil];
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -58,10 +60,6 @@
     self.tabBarController.viewControllers = @[viewController1, viewController2, viewController3, viewController4];
     self.window.rootViewController = self.tabBarController;
 
-}
-- (void)ugClientResponse:(UGClientResponse *)response
-{
-    NSLog(@"------------ %@", response.rawResponse);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
