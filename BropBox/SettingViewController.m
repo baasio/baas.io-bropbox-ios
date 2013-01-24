@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import <baas.io/baas.h>
 @interface SettingViewController ()  {
     UITableView *_tableView ;
 }
@@ -34,9 +35,7 @@
 #pragma mark - event
 - (void)signOutButtonPressed
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"access_token"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"user"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [BaasioUser signOut];
 
     id<UIApplicationDelegate> applicationDelegate = [UIApplication sharedApplication].delegate;
     [applicationDelegate performSelector:@selector(login)];
@@ -95,8 +94,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
     }
 
-    NSString *username = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"username"];
-    cell.detailTextLabel.text = username ;
+    cell.detailTextLabel.text = [BaasioUser currentUser].username ;
     cell.textLabel.text = @"아이디";
 
     return cell;

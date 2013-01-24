@@ -51,6 +51,8 @@
     return list;
 
 }
+
+//XXX BaasioFile 처리
 - (void)download:(NSDictionary *)info{
 
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:info];
@@ -70,37 +72,32 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0] ;
     [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 
-//    BaasClient *client = [BaasClient createInstance];
-//
-//    NSString *resourcePath = [NSString stringWithFormat:@"%@/files/%@", [client getAPIURL], [[[dictionary objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
-//    NSString *targetPath = [NSString stringWithFormat:@"%@/%@/%@", NSTemporaryDirectory(), @"download", [dictionary objectForKey:@"filename"]];
-//    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
-//
-//    [client setAuth:access_token];
-//    [client download:resourcePath
-//                   path:targetPath
-//             successBlock:^(NSDictionary *response){
-//                 UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
-//                 [progressView removeFromSuperview];
-//                 [dictionary removeObjectForKey:@"progressView"];
-//                 [_downloadFileList replaceObjectAtIndex:index withObject:[info objectForKey:@"filename"]];
-//                 [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//
-//             }
-//             failureBlock:^(NSError *error){
-//                NSLog(@"error : %@, %@", error.description, error.domain);
-//
-//                UITableViewCell *listCell =  [_tableView cellForRowAtIndexPath:indexPath];
-//                listCell.detailTextLabel.text = error.description;
-//
-//                UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
-//                [progressView removeFromSuperview];
-//             }
-//             progressBlock:^(float progress){
-//                UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
-//                progressView.progress = progress;
-//             }];
+    NSString *targetPath = [NSString stringWithFormat:@"%@/%@/%@", NSTemporaryDirectory(), @"download", [dictionary objectForKey:@"filename"]];
 
+    BaasioFile *file = [[BaasioFile alloc]init];
+    file.uuid = info[@"uuid"];
+    [file fileDownloadInBackground:targetPath
+                      successBlock:^(NSString *path){
+                          UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+                          [progressView removeFromSuperview];
+                          [dictionary removeObjectForKey:@"progressView"];
+                          [_downloadFileList replaceObjectAtIndex:index withObject:[info objectForKey:@"filename"]];
+                          [_tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+                      }
+                      failureBlock:^(NSError *error){
+                          NSLog(@"error : %@, %@", error.description, error.domain);
+                          
+                          UITableViewCell *listCell =  [_tableView cellForRowAtIndexPath:indexPath];
+                          listCell.detailTextLabel.text = error.description;
+                          
+                          UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+                          [progressView removeFromSuperview];
+                      }
+                     progressBlock:^(float progress){
+                         UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
+                         progressView.progress = progress;
+                     }];
 }
 
 
