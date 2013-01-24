@@ -41,29 +41,16 @@
 							
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//
-//    NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
-//    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
-//    BaasQuery *query = [[BaasQuery alloc] init];
-//
-//    BaasClient *client = [BaasClient createInstance];
-//    [client setDelegate:self];
-//    [client setAuth:access_token];
-//    [client getEntities:@"directories" query:query];
 
     BaasioQuery *query = [BaasioQuery queryWithCollection:@"files"];
     [query setWheres:[NSString stringWithFormat:@"user = %@" ,[BaasioUser currentUser].uuid]];
     [query queryInBackground:^(NSArray *array){
-                    _array = array;
+                    _array = [NSMutableArray arrayWithArray:array];
                     [_tableView reloadData];;
                 }
                 failureBlock:nil];
 }
 
-//- (void)ugClientResponse:(UGClientResponse *)response
-//{
-
-//}
 
 #pragma mark - UITableViewDelegate
 
@@ -84,38 +71,28 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
+    
+    NSDictionary *dic = _array[indexPath.row] ;
+    BaasioFile *file = [[BaasioFile alloc]init];
+    file.uuid = [dic objectForKey:@"uuid"];
+    [file deleteInBackground:^(void){
+    
+                    [_tableView beginUpdates];
+                    [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    [_array removeObjectAtIndex:indexPath.row];
+                    [_tableView endUpdates];
+                    [_tableView reloadData];
 
-//    BaasClient *client = [BaasClient createInstance];
-//    [client setAuth:access_token];
-//    for (NSDictionary *dic in [_array[indexPath.row] objectForKey:@"entities"]){
-//
-//        if ([[dic objectForKey:@"size"] intValue] != 0){
-//            [client delete:[dic objectForKey:@"uuid"]
-//                 successBlock:^(NSDictionary *response){
-//
-//                     BaasClient *client = [BaasClient createInstance];
-//                    [client setAuth:access_token];
-//                    [client removeEntity:@"directories" entityID:[_array[indexPath.row] objectForKey:@"uuid"]];
-//
-//                     [_tableView beginUpdates];
-//                     [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//                     [_array removeObjectAtIndex:indexPath.row];
-//                     [_tableView endUpdates];
-//                     [_tableView reloadData];
-//                 }
-//                 failureBlock:^(NSError *error){
-//                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"실패하였습니다.\n다시 시도해주세요."
-//                                                                         message:error.localizedDescription
-//                                                                        delegate:nil
-//                                                               cancelButtonTitle:@"OK"
-//                                                               otherButtonTitles:nil];
-//                     [alertView show];
-//                 }];
-//            break;
-//        }
-//
-//    }
+                }
+                failureBlock:^(NSError *error){
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"실패하였습니다.\n다시 시도해주세요."
+                                                                        message:error.localizedDescription
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];                    
+                }];
+
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
