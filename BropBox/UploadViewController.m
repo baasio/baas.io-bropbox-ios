@@ -85,18 +85,6 @@
     file.filename = [info objectForKey:@"filename"];
     [file setObject:[BaasioUser currentUser].uuid forKey:@"user"];
     [file fileUploadInBackground:^(BaasioFile *file){
-//                        NSLog(@"response : %@", file.description);
-//                        NSMutableDictionary *uploadedInfo = [NSMutableDictionary dictionary];
-//                        for (NSDictionary *dic in [response  objectForKey:@"entities"]){
-//                            float size = [[dic objectForKey:@"size"] floatValue];
-//                            if (size !=  0){
-//                                [uploadedInfo setValue:[NSString stringWithFormat:@"%f",size / 1000.f ] forKey:@"size"];
-//                                [uploadedInfo setValue:[dic objectForKey:@"modified"] forKey:@"date"];
-//
-//                                break;
-//                            }
-//                        }
-//                        [dictionary setValue:uploadedInfo forKey:@"uploadedInfo"];
 
                         UIProgressView *progressView = (UIProgressView *)[dictionary objectForKey:@"progressView"];
                         [progressView removeFromSuperview];
@@ -175,11 +163,11 @@
     UIProgressView *progressView = (UIProgressView *)[info objectForKey:@"progressView"];
 
     if (uploadedInfo != nil) {
-        int fSize = [[uploadedInfo objectForKey:@"size"] intValue];
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[uploadedInfo objectForKey:@"date"]longLongValue] / 1000 ];
-
-        listCell.textLabel.text = filename;
-        listCell.detailTextLabel.text = [NSString stringWithFormat:@"%iKB, %@", fSize, date.description];
+//        int fSize = [[uploadedInfo objectForKey:@"size"] intValue];
+//        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[uploadedInfo objectForKey:@"date"]longLongValue] / 1000 ];
+//
+//        listCell.textLabel.text = filename;
+//        listCell.detailTextLabel.text = [NSString stringWithFormat:@"%iKB, %@", fSize, date.description];
     }else{
          if(progressView) [listCell addSubview:progressView];
     }

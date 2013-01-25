@@ -7,9 +7,9 @@
 //
 
 #import "BoxListViewController.h"
-#import <baas.io/Baas.h>
 #import "AppDelegate.h"
 #import "DownloadViewController.h"
+#import <baas.io/Baas.h>
 
 @interface BoxListViewController ()    {
     UITableView *_tableView;
@@ -110,19 +110,18 @@
 
     UITableViewCell *listCell = [tableView dequeueReusableCellWithIdentifier:cellName];
     if (listCell == nil) {
-        listCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
+        listCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellName];
     }
 
     NSDictionary *object = [_array objectAtIndex:indexPath.row] ;
     NSString *filename = [object objectForKey:@"filename"];
-    NSString *path = @"";//[NSString stringWithFormat:@"%@/%@/%@/%@", BAAS_BASE_URL, BAAS_APPLICATION_ID, @"files", [[[object objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
 
     listCell.textLabel.text = filename;
     listCell.textLabel.font = [UIFont boldSystemFontOfSize:17.];
 
-//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 100.0f)];
-//    [imageView setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"directory-icon.png"]];
-//    listCell.imageView.image  = imageView.image;
+    int size = [[object objectForKey:@"size"]intValue] / 1000.f;
+    listCell.detailTextLabel.text = [NSString stringWithFormat:@"size : %i KB", size];
+    
     return listCell;
 }
 @end
