@@ -20,10 +20,10 @@
 @property(readonly, strong, getter = type) NSString *type;
 
 /**
- setEntity
+ set
  @param entity entity
  */
--(void)setEntity:(NSDictionary *)entity;
+-(void)set:(NSDictionary *)entity;
 
 /**
  entitytWithName
@@ -132,25 +132,25 @@
 
 #pragma mark - Entity
 /**
- getEntity
+ get
  @param entityName entityName
  @param uuid uuid
  @param error error
  */
-+ (BaasioEntity *)getEntity:(NSString*)entityName
-                       uuid:(NSString *)uuid
-                      error:(NSError **)error;
++ (BaasioEntity *)get:(NSString *)entityName
+                 uuid:(NSString *)uuid
+                error:(NSError **)error;
 /**
- getEntity asynchronously
+ get asynchronously
  @param entityName entityName
  @param uuid uuid
  @param successBlock successBlock
  @param failureBlock failureBlock
  */
-+ (BaasioRequest*)getEntityInBackground:(NSString*)entityName
-                         uuid:(NSString *)uuid
-                 successBlock:(void (^)(BaasioEntity *entity))successBlock
-                 failureBlock:(void (^)(NSError *error))failureBlock;
++ (BaasioRequest*)getInBackground:(NSString *)entityName
+                             uuid:(NSString *)uuid
+                     successBlock:(void (^)(BaasioEntity *entity))successBlock
+                     failureBlock:(void (^)(NSError *error))failureBlock;
 
 #pragma mark - super
 /**

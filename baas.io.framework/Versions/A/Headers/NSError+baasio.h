@@ -20,7 +20,6 @@ NSString *_uuid;
 
 /**
  uuid
- @param uuid uuid
  */
 - (NSString *)uuid;
 

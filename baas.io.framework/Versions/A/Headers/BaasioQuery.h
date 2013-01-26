@@ -34,10 +34,10 @@ typedef enum {
 + (BaasioQuery *)queryWithRelationship:(NSString *)name;
 
 /**
- projectionIn
- @param projectionIn projectionIn
+ setProjections
+ @param projections projections
  */
--(void)projectionIn:(NSString *)projectionIn;
+-(void)setProjections:(NSString *)projections;
 
 /**
  setWheres
