@@ -7,10 +7,9 @@
 //
 
 #import "BoxListViewController.h"
-#import "BaasClient.h"
-#import "AFNetworking.h"
 #import "AppDelegate.h"
 #import "DownloadViewController.h"
+#import <baas.io/Baas.h>
 
 @interface BoxListViewController ()    {
     UITableView *_tableView;
@@ -43,22 +42,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    NSString *uuid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"user"] objectForKey:@"uuid"];
-    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
-    BaasQuery *query = [[BaasQuery alloc] init];
-    [query addRequirement:[NSString stringWithFormat:@"user = %@" ,uuid]];
-
-    BaasClient *client = [BaasClient createInstance];
-    [client setDelegate:self];
-    [client setAuth:access_token];
-    [client getEntities:@"directories" query:query];
+    BaasioQuery *query = [BaasioQuery queryWithCollection:@"files"];
+    [query setWheres:[NSString stringWithFormat:@"user = %@" ,[BaasioUser currentUser].uuid]];
+    [query queryInBackground:^(NSArray *array){
+                    _array = [NSMutableArray arrayWithArray:array];
+                    [_tableView reloadData];;
+                }
+                failureBlock:nil];
 }
 
-- (void)ugClientResponse:(UGClientResponse *)response
-{
-    _array = [NSMutableArray arrayWithArray:[response.rawResponse objectForKey:@"entities"]];
-    [_tableView reloadData];;
-}
 
 #pragma mark - UITableViewDelegate
 
@@ -79,38 +71,29 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *access_token = [[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"] ;
+    
+    NSDictionary *dic = _array[indexPath.row] ;
+    BaasioFile *file = [[BaasioFile alloc]init];
+    file.uuid = [dic objectForKey:@"uuid"];
+    [file deleteInBackground:^(void){
+    
+                    [_tableView beginUpdates];
+                    [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                    [_array removeObjectAtIndex:indexPath.row];
+                    [_tableView endUpdates];
+                    [_tableView reloadData];
 
-    BaasClient *client = [BaasClient createInstance];
-    [client setAuth:access_token];
-    for (NSDictionary *dic in [_array[indexPath.row] objectForKey:@"entities"]){
+                }
+                failureBlock:^(NSError *error){
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"실패하였습니다.\n다시 시도해주세요."
+                                                                        message:error.localizedDescription
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];                    
+                }];
 
-        if ([[dic objectForKey:@"size"] intValue] != 0){
-            [client delete:[dic objectForKey:@"uuid"]
-                 successBlock:^(NSDictionary *response){
-
-                     BaasClient *client = [BaasClient createInstance];
-                    [client setAuth:access_token];
-                    [client removeEntity:@"directories" entityID:[_array[indexPath.row] objectForKey:@"uuid"]];
-
-                     [_tableView beginUpdates];
-                     [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-                     [_array removeObjectAtIndex:indexPath.row];
-                     [_tableView endUpdates];
-                     [_tableView reloadData];
-                 }
-                 failureBlock:^(NSError *error){
-                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"실패하였습니다.\n다시 시도해주세요."
-                                                                         message:error.localizedDescription
-                                                                        delegate:nil
-                                                               cancelButtonTitle:@"OK"
-                                                               otherButtonTitles:nil];
-                     [alertView show];
-                 }];
-            break;
-        }
-
-    }}
+}
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -127,19 +110,18 @@
 
     UITableViewCell *listCell = [tableView dequeueReusableCellWithIdentifier:cellName];
     if (listCell == nil) {
-        listCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellName];
+        listCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellName];
     }
 
     NSDictionary *object = [_array objectAtIndex:indexPath.row] ;
     NSString *filename = [object objectForKey:@"filename"];
-    NSString *path = @"";//[NSString stringWithFormat:@"%@/%@/%@/%@", BAAS_BASE_URL, BAAS_APPLICATION_ID, @"files", [[[object objectForKey:@"entities"] objectAtIndex:0] objectForKey:@"path"]];
 
     listCell.textLabel.text = filename;
     listCell.textLabel.font = [UIFont boldSystemFontOfSize:17.];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 100.0f)];
-    [imageView setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"directory-icon.png"]];
-    listCell.imageView.image  = imageView.image;
+    int size = [[object objectForKey:@"size"]intValue] / 1000.f;
+    listCell.detailTextLabel.text = [NSString stringWithFormat:@"size : %i KB", size];
+    
     return listCell;
 }
 @end

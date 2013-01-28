@@ -8,7 +8,8 @@
 
 #import <QuickLook/QuickLook.h>
 #import <UIKit/UIKit.h>
+#import <baas.io/baas.h>
 
-@interface DownloadViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, QLPreviewControllerDelegate>
+@interface DownloadViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UINavigationControllerDelegate, QLPreviewControllerDelegate, QLPreviewControllerDataSource>
 - (void)download:(NSDictionary *)info;
 @end

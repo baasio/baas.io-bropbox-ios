@@ -8,7 +8,7 @@
 
 #import "SignInViewController.h"
 #import "SignUpViewController.h"
-#import "BaasClient.h"
+#import <baas.io/Baas.h>
 
 @interface SignInViewController (){
     UITableView *_tableView ;
@@ -73,38 +73,25 @@
 {
     UITextField *idField = (UITextField *)[self.view viewWithTag:20];
     UITextField *passwdField = (UITextField *)[self.view viewWithTag:21];
-    
-    BaasClient *baasClient = [BaasClient createInstance];
-    [baasClient setDelegate:self];
-    [baasClient setLogging:YES];
-    UGClientResponse *response = [baasClient logInUser:idField.text password:passwdField.text];
-    NSLog(@"response.transactionID : %i", response.transactionID);
+
+    [BaasioUser signInBackground:idField.text
+                        password:passwdField.text
+                    successBlock:^(void){
+                        
+                        [[NSNotificationCenter defaultCenter] postNotificationName:APP_LOGIN_FINISH_NOTIFICATION object:nil];
+                        
+                    }
+                    failureBlock:^(NSError *error){
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"로그인에 실패하였습니다.\n다시 시도해주세요."
+                                                                            message:error.localizedDescription
+                                                                           delegate:nil
+                                                                  cancelButtonTitle:@"OK"
+                                                                  otherButtonTitles:nil];
+                        [alertView show];
+                        
+                    }];
 }
 
-#pragma mark - UGClient delegate
-
-- (void)ugClientResponse:(UGClientResponse *)response
-{
-    
-    NSDictionary *resp = (NSDictionary *)response.rawResponse;
-    if (response.transactionState == kUGClientResponseFailure) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"로그인에 실패하였습니다.\n다시 시도해주세요."
-                                                            message:[resp objectForKey:@"error_description"]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    } else {
-        NSString *access_token = [resp objectForKey:@"access_token"];
-        NSDictionary *user = [resp objectForKey:@"user"];
-
-        [[NSUserDefaults standardUserDefaults] setObject:access_token forKey:@"access_token"];
-        [[NSUserDefaults standardUserDefaults] setObject:user forKey:@"user"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:APP_LOGIN_FINISH_NOTIFICATION object:access_token];
-    }
-}
 
 #pragma mark - UITextFieldDelegate
 
