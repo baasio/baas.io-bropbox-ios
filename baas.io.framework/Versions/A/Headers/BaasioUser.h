@@ -24,6 +24,22 @@
  */
 + (BaasioUser *)currentUser;
 
+
+/**
+ update
+ @param error error
+ */
+- (BaasioUser *)update:(NSError **)error;
+
+/**
+ update asynchronously
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
+- (BaasioRequest*)updateInBackground:(void (^)(BaasioUser *group))successBlock
+                        failureBlock:(void (^)(NSError *error))failureBlock;
+
+
 /**
  signOut
  */
@@ -120,7 +136,7 @@
  @param failureBlock failureBlock
  */
 + (BaasioRequest*)signUpViaFacebookInBackground:(NSString *)accessToken
-                                          error:(void (^)(void))successBlock
+                                   successBlock:(void (^)(void))successBlock
                                    failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
@@ -140,7 +156,7 @@
  @param failureBlock failureBlock
  */
 + (BaasioRequest*)signInViaFacebookInBackground:(NSString *)accessToken
-                                          error:(void (^)(void))successBlock
+                                   successBlock:(void (^)(void))successBlock
                                    failureBlock:(void (^)(NSError *error))failureBlock;
 
 

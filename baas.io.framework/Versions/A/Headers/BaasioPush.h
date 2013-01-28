@@ -16,10 +16,10 @@
 
 /**
  sendPush
- @param config config
+ @param message message
  @param error error
  */
-- (void)sendPush:(BaasioMessage *)config
+- (void)sendPush:(BaasioMessage *)message
            error:(NSError**)error;
 
 /**

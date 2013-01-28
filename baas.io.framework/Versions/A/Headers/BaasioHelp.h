@@ -45,11 +45,14 @@
 
 /**
  asynchronously 문의 하기
- @param param param
+ @param email email
+ @param content content
  @param successBlock successBlock
  @param failureBlock failureBlock
 */
-- (BaasioRequest*)sendQuestionInBackground:(NSDictionary *)param
+
+- (BaasioRequest*)sendQuestionInBackground:(NSString *)email
+                                   content:(NSString *)content
                               successBlock:(void (^)(void))successBlock
                               failureBlock:(void (^)(NSError *error))failureBlock;
 @end
