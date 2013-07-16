@@ -9,7 +9,7 @@
 #import "BaasioRequest.h"
 
 /**
- A bass.io Framework File Object.
+ A baas.io Framework File Object.
 */
 @interface BaasioFile : BaasioEntity
 
@@ -130,12 +130,13 @@
                             failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
- objectForKey
+ Returns the value associated with a given key.
  @param key key
  */
 - (NSString *)objectForKey:(NSString *)key;
 /**
- setObject
+ Adds a given key-value pair to the dictionary.
+
  @param value value
  @param key key
  */
@@ -151,4 +152,9 @@
  dictionary
  */
 - (NSDictionary *)dictionary;
+
+/**
+ 파일의 경로
+ */
+- (NSURL *)url;
 @end

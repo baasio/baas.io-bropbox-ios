@@ -4,18 +4,17 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
-
 #import "BaasioEntity.h"
 #import "BaasioRequest.h"
 
 /**
- A bass.io Framework User Object.
+ A baas.io Framework User Object.
 */
 @interface BaasioUser : BaasioEntity
 @property(strong) NSString *username;
 
 /**
- user
+ user 생성 
  */
 + (BaasioUser *)user;
 
@@ -26,13 +25,13 @@
 
 
 /**
- update
+ user update
  @param error error
  */
 - (BaasioUser *)update:(NSError **)error;
 
 /**
- update asynchronously
+ user update asynchronously
  @param successBlock successBlock
  @param failureBlock failureBlock
  */
@@ -41,13 +40,13 @@
 
 
 /**
- signOut
+ 로그아웃
  */
 + (void)signOut;
 
 
 /**
- signIn
+ 로그인
 
  @param username username
  @param password password
@@ -58,7 +57,7 @@
          error:(NSError**)error;
 
 /**
- sign asynchronously
+ 로그인 asynchronously
 
  @param username username
  @param password password
@@ -71,7 +70,7 @@
                       failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
- signUp
+ 회원가입
 
  @param username username
  @param password password
@@ -86,7 +85,7 @@
          error:(NSError**)error;
 
 /**
- signUp asynchronously
+ 회원가입 asynchronously
 
  @param username username
  @param password password
@@ -102,15 +101,77 @@
                         successBlock:(void (^)(void))successBlock
                         failureBlock:(void (^)(NSError *error))failureBlock;
 
+
 /**
- unsubscribe
+ 회원가입
+
+ @param error error
+*/
+-(void)signUp:(NSError **)error;
+
+/**
+ 회원가입 asynchronously
+
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+*/
+
+- (BaasioRequest*)signUpInBackground:(void (^)(void))successBlock
+                      failureBlock:(void (^)(NSError *error))failureBlock;
+
+/**
+ 비밀번호 재설정
+
+ @param username username
+ @param error error
+ */
++ (void)resetPassword:(NSString*)username
+                error:(NSError**)error;
+ 
+/**
+ 비밀번호 재설정 asynchronously
+ 
+ @param username username
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
++ (BaasioRequest*)resetPasswordInBackground:(NSString*)username
+                               successBlock:(void (^)(void))successBlock
+                               failureBlock:(void (^)(NSError *error))failureBlock;
+
+/**
+ 비밀번호 변경
+ 
+ @param oldPassword oldPassword
+ @param newPassword newPassword
+ @param error error
+ */
+- (void)changePassword:(NSString *)oldPassword
+           newPassword:(NSString *)newPassword
+                 error:(NSError**)error;
+
+/**
+ 비밀번호 변경 asynchronously
+ 
+ @param oldPassword oldPassword
+ @param newPassword newPassword
+ @param successBlock successBlock
+ @param failureBlock failureBlock
+ */
+- (BaasioRequest*)changePasswordInBackground:(NSString *)oldPassword
+                                 newPassword:(NSString *)newPassword
+                                successBlock:(void (^)(void))successBlock
+                                failureBlock:(void (^)(NSError *error))failureBlock;
+
+/**
+ 탈퇴
 
  @param error error
  */
 - (void)unsubscribe:(NSError**)error;
 
 /**
- unsubscribe asynchronously
+ 탈퇴 asynchronously
 
  @param successBlock successBlock
  @param failureBlock failureBlock
@@ -120,7 +181,7 @@
 
 
 /**
- signUp via Facebook
+ Facebook 통한 회원가입
 
  @param accessToken accessToken
  @param error error
@@ -129,7 +190,7 @@
                     error:(NSError**)error;
 
 /**
- signUp via Facebook asynchronously
+ Facebook 통한 회원가입 asynchronously
 
  @param accessToken accessToken
  @param successBlock successBlock
@@ -140,7 +201,7 @@
                                    failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
- signIn via Facebook
+ Facebook 통한 로그인
 
  @param accessToken accessToken
  @param error error
@@ -149,7 +210,7 @@
                     error:(NSError**)error;
 
 /**
- signIn via Facebook asynchronously
+ Facebook 통한 로그인 asynchronously
 
  @param accessToken accessToken
  @param successBlock successBlock
@@ -162,13 +223,13 @@
 
 #pragma mark - for super document
 /**
- set
+ user set
  @param entity entity
  */
 -(void)set:(NSDictionary *)entity;
 
 /**
- connect
+ user connect
  @param entity entity
  @param relationship relationship
  @param error error
@@ -177,7 +238,7 @@
     relationship:(NSString*)relationship
            error:(NSError **)error;
 /**
- connect asynchronously
+ user connect asynchronously
  @param entity entity
  @param relationship relationship
  @param successBlock successBlock
@@ -188,7 +249,7 @@
                          successBlock:(void (^)(void))successBlock
                          failureBlock:(void (^)(NSError *error))failureBlock;
 /**
- disconnect
+ user disconnect
  @param entity entity
  @param relationship relationship
  @param error error
@@ -198,7 +259,7 @@
               error:(NSError **)error;
 
 /**
- disconnect asynchronously
+ user disconnect asynchronously
  @param entity entity
  @param relationship relationship
  @param successBlock successBlock
@@ -210,12 +271,12 @@
                             failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
- objectForKey
+ Returns the value associated with a given key.
  @param key key
  */
 - (NSString *)objectForKey:(NSString *)key;
 /**
- setObject
+ Adds a given key-value pair to the dictionary.
  @param value value
  @param key key
  */
@@ -223,12 +284,12 @@
 
 
 /**
- description
+ Returns a string that represents the contents of the dictionary, formatted as a property list.
  */
 - (NSString *)description;
 
 /**
- dictionary
+ Entity dictionary
  */
 - (NSDictionary *)dictionary;
 @end

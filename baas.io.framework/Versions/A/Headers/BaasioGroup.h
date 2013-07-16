@@ -10,11 +10,11 @@
 #import "BaasioUser.h"
 
 /**
- A bass.io Framework Group Object.
+ A baas.io Framework Group Object.
 */
 @interface BaasioGroup : BaasioEntity
 /**
- setGroupName
+ create group
  @param group group name
 */
 - (void)setGroupName:(NSString*)group;
@@ -162,12 +162,12 @@
                             failureBlock:(void (^)(NSError *error))failureBlock;
 
 /**
- objectForKey
+ Returns the value associated with a given key.
  @param key key
  */
 - (NSString *)objectForKey:(NSString *)key;
 /**
- setObject
+ Adds a given key-value pair to the dictionary.
  @param value value
  @param key key
  */
@@ -175,7 +175,7 @@
 
 
 /**
- description
+ Returns a string that represents the contents of the dictionary, formatted as a property list.
  */
 - (NSString *)description;
 

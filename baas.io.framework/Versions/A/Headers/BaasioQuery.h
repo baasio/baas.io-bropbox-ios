@@ -12,71 +12,68 @@ typedef enum {
 #import "BaasioGroup.h"
 
 /**
- A bass.io Framework Query Object.
+ A baas.io Framework Query Object.
  */
 @interface BaasioQuery : NSObject
 /**
- queryWithCollection
+ Collection용 Query 생성
  @param name name
  */
 + (BaasioQuery *)queryWithCollection:(NSString *)name;
 
 /**
- queryWithGroup
+ Group용 Query 생성
+ 
  @param name name
  */
 + (BaasioQuery *)queryWithGroup:(NSString *)name;
 
 /**
- queryWithRelationship
- @param name name
+ Relationship용 Query 생성
+ 
+ @param entityName entityName
+ @param uuid uuid
+ @param relationName relationName
  */
-+ (BaasioQuery *)queryWithRelationship:(NSString *)name;
++ (BaasioQuery *)queryWithRelationship:(NSString *)entityName
+                              withUUID:(NSString *)uuid
+                          withRelation:(NSString*)relationName;
 
 /**
- setProjectionIn
+ 가져올 property
+ 
+ 예) 이름, uuid => [query setProjectionIn:@"name, uuid"];
  @param projectionIn projectionIn
  */
 -(void)setProjectionIn:(NSString *)projectionIn;
 
 /**
- setWheres
- @param wheres wheres
+ where 조건
+ @param wheres wheres 조건
  */
 -(void)setWheres:(NSString *)wheres;
 
 /**
- setOrderBy
+ 정렬
  @param key key
- @param order order
+ @param order BaasioQuerySortOrderASC or BaasioQuerySortOrderDESC
  */
 -(void)setOrderBy:(NSString *)key order:(BaasioQuerySortOrder)order;
 
 /**
- setLimit
- @param limit limit
+ limit
+ @param limit 결과를 가져올 갯수(default : 10개)
  */
 -(void)setLimit: (int)limit;
 
 /**
- cursor
+ 페이징 초기화 
  */
--(NSString *)cursor;
-
-/**
- setCursor
- @param cursor cursor
- */
--(void)setCursor:(NSString *)cursor;
-
-
-/**
- setResetCursor
- */
--(void)setResetCursor;
+-(void)clearCursor;
 
 /**
  hasMoreEntities
+ 다음 결과 존재 여부
  */
 -(BOOL)hasMoreEntities;
 
@@ -86,26 +83,26 @@ typedef enum {
 -(NSString *)description;
 
 /**
- next
+ 다음 결과
  @param error error
  */
 -(NSArray *)next:(NSError**)error;
 
 /**
- next asynchronously
+ 다음 결과 asynchronously
  @param successBlock successBlock
  @param failureBlock failureBlock
  */
 -(BaasioRequest *)nextInBackground:(void (^)(NSArray *objects))successBlock
                       failureBlock:(void (^)(NSError *error))failureBlock;
 /**
- prev
+ 이전 결과
  @param error error
  */
 -(NSArray *)prev:(NSError**)error;
 
 /**
- prev asynchronously
+ 이전 결과 asynchronously
  @param successBlock successBlock
  @param failureBlock failureBlock
  */

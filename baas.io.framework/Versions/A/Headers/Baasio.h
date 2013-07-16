@@ -9,40 +9,46 @@
 
 
 /**
- A bass.io Framework File Object.
+ A baas.io Framework File Object.
  */
 @interface Baasio : NSObject
 @property(nonatomic, strong) NSString *apiURL;
 @property(nonatomic, strong) NSString *applicationName;
 @property(nonatomic, strong) NSString *baasioID;
-
 /**
  sharedInstance
  */
 + (id)sharedInstance;
 /**
  setApplicationInfo
- @param baasioID baasioID
- @param applicationName applicationName
+ @param baasioID baas.io ID
+ @param applicationName Application ID
  */
 + (void)setApplicationInfo:(NSString *)baasioID applicationName:(NSString *)applicationName;
+
 /**
  setApplicationInfo
- @param apiURL apiURL
- @param baasioID baasioID
- @param applicationName applicationName
+ @param apiURL API Host
+ @param baasioID baas.io ID
+ @param applicationName Application IDe
  */
 + (void)setApplicationInfo:(NSString *)apiURL baasioID:(NSString *)baasioID applicationName:(NSString *)applicationName;
 
 /**
- getAPIURL
+ 현재 SDK가 바라보는 API URL 정보
  */
 - (NSURL *)getAPIURL;
 
 /**
- hasToken
+ 로그인 유무 체크
  */
 - (BOOL)hasToken;
+
+/**
+ 디버그 모드 체크 (true 일때, 디버그 모드)
+ @param flag flag
+ */
+- (void)isDebugMode:(BOOL)flag;
 @end
 
 
