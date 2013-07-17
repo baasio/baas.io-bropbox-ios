@@ -305,7 +305,7 @@
 		AFE81C1C160843E800255D1E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = kth;
 			};
 			buildConfigurationList = AFE81C1F160843E800255D1E /* Build configuration list for PBXProject "BropBox" */;
@@ -502,6 +502,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BropBox/BropBox-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/**";
 				INFOPLIST_FILE = "BropBox/BropBox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -532,6 +533,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BropBox/BropBox-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/include/**";
 				INFOPLIST_FILE = "BropBox/BropBox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

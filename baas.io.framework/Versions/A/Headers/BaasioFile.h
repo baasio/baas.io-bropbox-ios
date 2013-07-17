@@ -9,7 +9,7 @@
 #import "BaasioRequest.h"
 
 /**
- A bass.io Framework File Object.
+ A baas.io Framework File Object.
 */
 @interface BaasioFile : BaasioEntity
 
@@ -152,4 +152,9 @@
  dictionary
  */
 - (NSDictionary *)dictionary;
+
+/**
+ 파일의 경로
+ */
+- (NSURL *)url;
 @end
